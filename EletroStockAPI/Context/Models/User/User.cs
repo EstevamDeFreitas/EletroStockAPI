@@ -14,5 +14,7 @@ namespace EletroStockAPI.Context.Models
         public char Status { get; set; }
         [Column("usr_user_type")]
         public char UserType { get; set; }
+
+        public Customer? Customer { get; set; }
     }
 }
