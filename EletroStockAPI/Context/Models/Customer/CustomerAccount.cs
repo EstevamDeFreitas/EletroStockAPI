@@ -18,6 +18,6 @@ namespace EletroStockAPI.Context.Models
         public Customer Customer { get; set; }
         public Address ChargeAddress { get; set; }
         public Address DeliveryAddress { get; set; }
-        //public Card Card { get; set; }
+        public CreditCard Card { get; set; }
     }
 }

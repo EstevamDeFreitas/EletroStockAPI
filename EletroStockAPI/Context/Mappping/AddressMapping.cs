@@ -9,16 +9,16 @@ namespace EletroStockAPI.Context.Mappping
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.AddressType);
-            builder.Property(x => x.City);
-            builder.Property(x => x.CEP);
-            builder.Property(x => x.Country);
+            builder.Property(x => x.AddressType).IsRequired();
+            builder.Property(x => x.City).IsRequired();
+            builder.Property(x => x.CEP).IsRequired();
+            builder.Property(x => x.Country).IsRequired();
             builder.Property(x => x.Description);
-            builder.Property(x => x.District);
-            builder.Property(x => x.Number);
-            builder.Property(x => x.State);
-            builder.Property(x => x.Street) ;
-            builder.Property(x => x.StreetType);
+            builder.Property(x => x.District).IsRequired();
+            builder.Property(x => x.Number).IsRequired();
+            builder.Property(x => x.State).IsRequired();
+            builder.Property(x => x.Street).IsRequired();
+            builder.Property(x => x.StreetType).IsRequired();
 
             builder.HasOne(x => x.Customer).WithMany(x => x.Addresses).HasForeignKey(x => x.CustomerId);
 

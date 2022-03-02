@@ -30,7 +30,7 @@ namespace EletroStockAPI.Context.Models
         //Relation
         public User User { get; set; }
         public IEnumerable<Address> Addresses { get; set; }
-        //public List<Card> Cards { get; set; }
+        public IEnumerable<CreditCard> Cards { get; set; }
         //public List<Coupon> Coupons { get; set; }
     }
 }

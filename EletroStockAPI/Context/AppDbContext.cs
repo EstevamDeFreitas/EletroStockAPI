@@ -9,6 +9,7 @@ namespace EletroStockAPI.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<CardFlag> CardFlags { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
@@ -22,6 +23,7 @@ namespace EletroStockAPI.Context
             builder.ApplyConfiguration(new UserMapping());
             builder.ApplyConfiguration(new CustomerMapping());
             builder.ApplyConfiguration(new AddressMapping());
+            builder.ApplyConfiguration(new CardFlagMapping());
         }
     }
 }

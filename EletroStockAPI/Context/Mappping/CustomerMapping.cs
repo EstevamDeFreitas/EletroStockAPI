@@ -22,6 +22,7 @@ namespace EletroStockAPI.Context.Mappping
 
             builder.HasOne(x => x.User).WithOne(y => y.Customer).HasForeignKey<Customer>(x => x.UserId);
             builder.HasMany(x => x.Addresses).WithOne(y => y.Customer);
+            
 
             builder.ToTable("tb_customers");
 
