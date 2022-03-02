@@ -11,8 +11,6 @@ namespace EletroStockAPI.Context.Mappping
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired();
 
-            builder.HasMany(x => x.CreditCards).WithOne(x => x.Flag);
-
             builder.ToTable("tb_card_flags");
         }
     }

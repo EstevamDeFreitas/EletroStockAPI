@@ -19,8 +19,7 @@ namespace EletroStockAPI.Context.Mappping
             builder.Property(x => x.State).IsRequired();
             builder.Property(x => x.Street).IsRequired();
             builder.Property(x => x.StreetType).IsRequired();
-
-            builder.HasOne(x => x.Customer).WithMany(x => x.Addresses).HasForeignKey(x => x.CustomerId);
+            builder.Property(x => x.CustomerId).IsRequired();
 
             builder.ToTable("tb_addresses");
 

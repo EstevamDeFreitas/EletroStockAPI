@@ -9,6 +9,5 @@ namespace EletroStockAPI.Context.Models
         [Column("car_name")]
         public string Name { get; set; }
 
-        public IEnumerable<CreditCard> CreditCards { get; set; }
     }
 }

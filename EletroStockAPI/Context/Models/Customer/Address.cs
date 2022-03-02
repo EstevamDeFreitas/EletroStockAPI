@@ -29,8 +29,5 @@ namespace EletroStockAPI.Context.Models
         [Column("add_country")]
         public string Country { get; set; }
 
-        //Relation
-        public Customer Customer { get; set; }
-        public CustomerAccount? CustomerAccount { get; set; }
     }
 }

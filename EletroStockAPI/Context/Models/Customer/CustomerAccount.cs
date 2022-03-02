@@ -15,9 +15,5 @@ namespace EletroStockAPI.Context.Models
         [Column("cac_id_default_card")]
         public string CardId { get; set; }
 
-        public Customer Customer { get; set; }
-        public Address ChargeAddress { get; set; }
-        public Address DeliveryAddress { get; set; }
-        public CreditCard Card { get; set; }
     }
 }

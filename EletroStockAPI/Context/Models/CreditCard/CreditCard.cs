@@ -16,10 +16,5 @@ namespace EletroStockAPI.Context.Models
         public string Name { get; set; }
         [Column("cre_id_flag")]
         public string FlagId { get; set; }
-
-        //Relation
-        public Customer Customer { get; set; }
-        public CardFlag Flag { get; set; }
-        public CustomerAccount? CustomerAccount { get; set; }
     }
 }

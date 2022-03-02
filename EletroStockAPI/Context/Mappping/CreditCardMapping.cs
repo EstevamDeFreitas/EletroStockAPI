@@ -12,9 +12,8 @@ namespace EletroStockAPI.Context.Mappping
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Number).IsRequired();
             builder.Property(x => x.SecurityCode).IsRequired();
-
-            builder.HasOne(x => x.Customer).WithMany(x => x.Cards).HasForeignKey(x => x.IdCustomer);
-            builder.HasOne(x => x.Flag).WithMany(x => x.CreditCards).HasForeignKey(x => x.FlagId);
+            builder.Property(x => x.IdCustomer).IsRequired();
+            builder.Property(x => x.FlagId).IsRequired();
 
             builder.ToTable("tb_credit_cards");
         }

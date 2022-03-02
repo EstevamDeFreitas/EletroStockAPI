@@ -18,10 +18,8 @@ namespace EletroStockAPI.Context.Mappping
             builder.Property(x => x.PhoneNumber).IsRequired();
             builder.Property(x => x.PhoneType).IsRequired();
             builder.Property(x => x.Ranking).IsRequired();
+            builder.Property(x => x.UserId).IsRequired();
 
-
-            builder.HasOne(x => x.User).WithOne(y => y.Customer).HasForeignKey<Customer>(x => x.UserId);
-            builder.HasMany(x => x.Addresses).WithOne(y => y.Customer);
             
 
             builder.ToTable("tb_customers");

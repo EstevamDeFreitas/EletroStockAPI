@@ -1,6 +1,8 @@
+using AutoMapper;
 using EletroStockAPI.Context;
 using EletroStockAPI.Context.Repositories.Implementation;
 using EletroStockAPI.Context.Repositories.Interfaces;
+using EletroStockAPI.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -15,6 +17,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var mapConfig = new MapperConfiguration(config =>
+{
+    config.AddProfile(new AutoMapperConfig());
+});
+
+IMapper mapper = mapConfig.CreateMapper();
+
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseNpgsql(configuration["ConnectionStrings:DbConnection"])

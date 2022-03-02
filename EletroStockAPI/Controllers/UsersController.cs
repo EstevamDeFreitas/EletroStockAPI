@@ -1,4 +1,5 @@
-﻿using EletroStockAPI.Context.Repositories.Interfaces;
+﻿using AutoMapper;
+using EletroStockAPI.Context.Repositories.Interfaces;
 using EletroStockAPI.Models;
 using EletroStockAPI.Models.Shared;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +12,12 @@ namespace EletroStockAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUsersRepository usersRepository)
+        public UsersController(IUsersRepository usersRepository, IMapper mapper)
         {
             _usersRepository = usersRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -22,9 +25,11 @@ namespace EletroStockAPI.Controllers
         {
             var users = _usersRepository.GetAllUsers();
 
+            var usersModel = _mapper.Map<List<UserModel>>(users);
+
             return Ok(new
             {
-                Users = users,
+                Users = usersModel,
                 Message = "Teste realizado com sucesso!"
             });
         }

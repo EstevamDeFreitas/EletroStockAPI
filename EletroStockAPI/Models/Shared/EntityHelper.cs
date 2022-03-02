@@ -17,7 +17,7 @@ namespace EletroStockAPI.Models.Shared
         }
 
         /// <summary>
-        /// Creates a new user with a generated guid and active status by default
+        /// Converts a UserCreateModel in a new user with a generated guid and active status by default
         /// </summary>
         /// <returns>A new user</returns>
         public static User CreateUser(UserCreateModel user)
