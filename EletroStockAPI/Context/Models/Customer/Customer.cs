@@ -31,6 +31,7 @@ namespace EletroStockAPI.Context.Models
         public User User { get; set; }
         public IEnumerable<Address> Addresses { get; set; }
         public IEnumerable<CreditCard> Cards { get; set; }
+        public CustomerAccount CustomerAccount { get; set; }
         //public List<Coupon> Coupons { get; set; }
     }
 }

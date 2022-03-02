@@ -31,5 +31,6 @@ namespace EletroStockAPI.Context.Models
 
         //Relation
         public Customer Customer { get; set; }
+        public CustomerAccount? CustomerAccount { get; set; }
     }
 }
