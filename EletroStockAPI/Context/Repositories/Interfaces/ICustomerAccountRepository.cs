@@ -5,7 +5,7 @@ namespace EletroStockAPI.Context.Repositories.Interfaces
 {
     public interface ICustomerAccountRepository : IRepositoryBase
     {
-        public CustomerAccountModel GetCustomerAccount(string customerId);
+        public CustomerAccount? GetCustomerAccount(string customerId);
         public void CreateCustomerAccount(CustomerAccount customerAccount);
         public void UpdateCustomerAccount(CustomerAccount customerAccount);
     }
