@@ -31,5 +31,14 @@ namespace EletroStockAPI.Models.Shared
                 Password = user.Password
             };
         }
+
+        /// <summary>
+        /// Converts the default datetime to a format that works with postgresql
+        /// </summary>
+        /// <returns></returns>
+        public static DateTime ConvertDatetimeToUTC(DateTime dateTime)
+        {
+            return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+        }
     }
 }

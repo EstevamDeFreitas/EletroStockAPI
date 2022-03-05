@@ -32,8 +32,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 
+
+
 //Creates the relationship between a repository interface and its implementation
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICreditCardRepository, CreditCardRepository>();
+builder.Services.AddScoped<ICustomerAccountRepository, CustomerAccountRepository>();
 
 
 var app = builder.Build();
