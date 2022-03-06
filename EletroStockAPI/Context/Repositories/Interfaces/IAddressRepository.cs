@@ -8,5 +8,6 @@ namespace EletroStockAPI.Context.Repositories.Interfaces
         public bool AddCustomerAddress(Address address);
         public bool UpdateCustomerAddress(Address address);
         public bool DeleteCustomerAddress(Address address);
+        public Address? GetAddress(string id);
     }
 }

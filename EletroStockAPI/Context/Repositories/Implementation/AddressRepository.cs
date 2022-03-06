@@ -37,6 +37,11 @@ namespace EletroStockAPI.Context.Repositories.Implementation
             }
         }
 
+        public Address? GetAddress(string id)
+        {
+            return context.Addresses.Where(x => x.Id == id).FirstOrDefault(); 
+        }
+
         public List<Address> GetCustomerAddresses(string customerId)
         {
             return context.Addresses.Where(x => x.CustomerId == customerId).ToList();

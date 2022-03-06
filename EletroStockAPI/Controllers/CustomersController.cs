@@ -59,6 +59,22 @@ namespace EletroStockAPI.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetCustomers()
+        {
+            try
+            {
+                var customers = _customerRepository.GetCustomers();
+                var customerModel = _mapper.Map<List<CustomerModel>>(customers);
+
+                return Ok(new MessageBase<List<CustomerModel>> { Message = Message.Success, Result = customerModel });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new MessageBase<object> { Message = ex.Message});
+            }
+        }
+
         [HttpPost]
         public IActionResult CreateCustomer([FromBody] CustomerCreateModel customer)
         {
@@ -106,23 +122,6 @@ namespace EletroStockAPI.Controllers
             }
         }
 
-        [Route("address")]
-        [HttpPost]
-        public IActionResult CreateAddress([FromBody] AddressModel address)
-        {
-            try
-            {
-                //TODO add the address validation
-                var addressEntity = _mapper.Map<Address>(address);
-                addressEntity.Id = EntityHelper.GenerateGuid();
-                _addressRepository.AddCustomerAddress(addressEntity);
-
-                return Ok(new MessageBase<object> { Message = Message.Success });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new MessageBase<object> { Message = ex.Message });
-            }
-        }
+        
     }
 }
