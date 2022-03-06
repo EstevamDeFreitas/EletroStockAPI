@@ -42,7 +42,7 @@ namespace EletroStockAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new MessageBase<object> { Message = Message.Success});
+                return BadRequest(new MessageBase<object> { Message = ex.Message});
             }
         }
     }
