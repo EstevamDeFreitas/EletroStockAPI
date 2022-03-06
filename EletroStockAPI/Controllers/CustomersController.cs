@@ -82,6 +82,14 @@ namespace EletroStockAPI.Controllers
                 addressEntity.CustomerId = customerEntity.Id;
                 _addressRepository.AddCustomerAddress(addressEntity);
 
+                var customerAccountEntity = new CustomerAccount
+                {
+                    CustomerId = customerEntity.Id,
+                    ChargeAddressId = addressEntity.Id,
+                    DeliveryAddressId = addressEntity.Id,
+                    Id = EntityHelper.GenerateGuid()
+                };
+                _customerAccountRepository.CreateCustomerAccount(customerAccountEntity);
 
 
                 return Ok(new MessageBase<object>
@@ -95,6 +103,25 @@ namespace EletroStockAPI.Controllers
                 {
                     Message = ex.Message
                 });
+            }
+        }
+
+        [Route("address")]
+        [HttpPost]
+        public IActionResult CreateAddress([FromBody] AddressModel address)
+        {
+            try
+            {
+                //TODO add the address validation
+                var addressEntity = _mapper.Map<Address>(address);
+                addressEntity.Id = EntityHelper.GenerateGuid();
+                _addressRepository.AddCustomerAddress(addressEntity);
+
+                return Ok(new MessageBase<object> { Message = Message.Success });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new MessageBase<object> { Message = ex.Message });
             }
         }
     }
