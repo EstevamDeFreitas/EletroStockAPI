@@ -8,5 +8,6 @@ namespace EletroStockAPI.Context.Repositories.Interfaces
         public bool AddCreditCard(CreditCard creditCard);
         public bool UpdateCreditCard(CreditCard creditCard);
         public bool DeleteCreditCard(CreditCard creditCard);
+        public CreditCard? GetCredit(string id);
     }
 }

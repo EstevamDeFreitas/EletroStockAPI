@@ -17,13 +17,15 @@ namespace EletroStockAPI.Controllers
         private readonly ICustomerAccountRepository _customerAccountRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly ICreditCardRepository _creditCardRepository;
 
-        public CustomersController(IMapper mapper, ICustomerAccountRepository customerAccountRepository, ICustomerRepository customerRepository, IAddressRepository addressRepository)
+        public CustomersController(IMapper mapper, ICustomerAccountRepository customerAccountRepository, ICustomerRepository customerRepository, IAddressRepository addressRepository, ICreditCardRepository creditCardRepository)
         {
             _mapper = mapper;
             _customerAccountRepository = customerAccountRepository;
             _customerRepository = customerRepository;
             _addressRepository = addressRepository;
+            _creditCardRepository = creditCardRepository;
         }
 
         [Route("{id}")]
@@ -122,6 +124,104 @@ namespace EletroStockAPI.Controllers
             }
         }
 
-        
+        [HttpPut]
+        public IActionResult EditCustomer([FromBody] CustomerModel customer)
+        {
+            try
+            {
+                var customerEntity = _mapper.Map<Customer>(customer);
+                _customerRepository.UpdateCustomer(customerEntity);
+
+                return Ok(new MessageBase<object>
+                {
+                    Message = Message.Success
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new MessageBase<object> { Message=ex.Message});
+            }
+        }
+
+        [Route("{id}/account")]
+        [HttpGet]
+        public IActionResult GetCustomerAccount(string id)
+        {
+            try
+            {
+                var customerAccount = _customerAccountRepository.GetCustomerAccount(id);
+
+                if(customerAccount == null)
+                {
+                    return NotFound(new MessageBase<object> { Message = Message.NotFound });
+                }
+
+                return Ok(new MessageBase<CustomerAccount> { Message = Message.Success, Result = customerAccount});
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new MessageBase<object> { Message = ex.Message});
+            }
+        }
+
+        [Route("{id}/account")]
+        [HttpPost]
+        public IActionResult EditCustomerAccount(string id, [FromQuery] string chargeAddressId = "", [FromQuery] string deliveryAddressId = "", [FromQuery] string defaultCardId = "")
+        {
+            try
+            {
+                var customerAccount = _customerAccountRepository.GetCustomerAccount(id);
+
+                if(customerAccount == null)
+                {
+                    return NotFound(new MessageBase<object> { Message = Message.NotFound });
+                }
+
+                if(deliveryAddressId != "")
+                {
+                    var deliveryAddress = _addressRepository.GetAddress(deliveryAddressId);
+
+                    if(deliveryAddress == null)
+                    {
+                        return NotFound(new MessageBase<object> { Message = AddressMessage.DeliveryNotFound });
+                    }
+
+                    customerAccount.DeliveryAddressId = deliveryAddressId;
+                }
+
+                if(chargeAddressId != "")
+                {
+                    var chargeAddress = _addressRepository.GetAddress(chargeAddressId);
+
+                    if(chargeAddress == null)
+                    {
+                        return NotFound(new MessageBase<object> { Message = AddressMessage.ChargeNotFound});
+                    }
+
+                    customerAccount.ChargeAddressId = chargeAddressId;
+                }
+
+                if(defaultCardId != "")
+                {
+                    var defaultCard = _creditCardRepository.GetCredit(defaultCardId);
+
+                    if(defaultCard == null)
+                    {
+                        return NotFound(new MessageBase<object> { Message= Message.NotFound });
+                    }
+
+                    customerAccount.CardId = defaultCardId;
+                }
+
+                _customerAccountRepository.UpdateCustomerAccount(customerAccount);
+
+                return Ok(new MessageBase<object>{ Message = Message.Success });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new MessageBase<object> { Message=ex.Message});
+            }
+        }
     }
 }

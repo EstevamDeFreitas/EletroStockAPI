@@ -124,9 +124,10 @@ namespace EletroStockAPI.Controllers
                             Message = Message.ObjectInUse
                         });
                     }
-                }
 
-                _addressRepository.DeleteCustomerAddress(addressEntity);
+                    _addressRepository.DeleteCustomerAddress(addressEntity);
+
+                }
 
                 return Ok(new MessageBase<object>
                 {

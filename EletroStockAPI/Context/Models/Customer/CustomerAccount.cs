@@ -13,7 +13,7 @@ namespace EletroStockAPI.Context.Models
         [Column("cac_id_default_delivery_addresses")]
         public string DeliveryAddressId { get; set; }
         [Column("cac_id_default_card")]
-        public string CardId { get; set; }
+        public string? CardId { get; set; }
 
     }
 }

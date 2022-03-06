@@ -13,4 +13,10 @@
 
         public const string ObjectInUse = "Object in Use";
     }
+
+    public static class AddressMessage
+    {
+        public const string ChargeNotFound = "Charge Address Not Found";
+        public const string DeliveryNotFound = "Delivery Address Not Found";
+    }
 }

@@ -37,6 +37,11 @@ namespace EletroStockAPI.Context.Repositories.Implementation
             }
         }
 
+        public CreditCard? GetCredit(string id)
+        {
+            return context.CreditCards.Where(c => c.Id == id).FirstOrDefault();
+        }
+
         public List<CreditCard> GetCustomerCreditCards(string customerId)
         {
             return context.CreditCards.Where(x => x.IdCustomer == customerId).ToList();
