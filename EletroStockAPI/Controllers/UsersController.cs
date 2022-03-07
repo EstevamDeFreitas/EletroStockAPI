@@ -2,6 +2,7 @@
 using EletroStockAPI.Context.Repositories.Interfaces;
 using EletroStockAPI.Models;
 using EletroStockAPI.Models.Shared;
+using EletroStockAPI.Utilities.Messages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,6 +39,13 @@ namespace EletroStockAPI.Controllers
         public IActionResult CreateUser(UserCreateModel user)
         {
             var newUser = EntityHelper.CreateUser(user);
+
+            var userValidity = _usersRepository.GetUserByEmail(user.Email);
+
+            if(userValidity != null)
+            {
+                return BadRequest(new MessageBase<object> { Message = UserMessage.EmailAlreadyInUse });
+            }
 
             var result = _usersRepository.CreateUser(newUser);
 

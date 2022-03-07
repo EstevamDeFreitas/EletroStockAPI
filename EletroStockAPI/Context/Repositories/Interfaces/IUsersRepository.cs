@@ -9,5 +9,6 @@ namespace EletroStockAPI.Context.Repositories.Interfaces
         public bool CreateUser(User user);
         public bool DeleteUser(string userId);
         public bool UpdateUser(User user);
+        public User? GetUserByEmail(string userEmail);
     }
 }

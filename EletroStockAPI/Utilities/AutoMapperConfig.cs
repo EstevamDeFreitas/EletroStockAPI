@@ -12,6 +12,7 @@ namespace EletroStockAPI.Utilities
             CreateMap<Customer, CustomerModel>().ReverseMap();
             CreateMap<Address, AddressModel>().ReverseMap();
             CreateMap<CreditCard, CreditCardModel>().ReverseMap();
+            CreateMap<CreditCard, CreditCardCreateModel>().ReverseMap();
             CreateMap<CustomerAccount, CustomerAccountModel>().ReverseMap();
             CreateMap<Customer, CustomerCreateModel>().ReverseMap();
             CreateMap<Address, AddressCreateModel>().ReverseMap();

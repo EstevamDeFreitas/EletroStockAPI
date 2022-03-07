@@ -58,6 +58,11 @@ namespace EletroStockAPI.Context.Repositories.Implementation
             return context.Users.Find(userId); 
         }
 
+        public User? GetUserByEmail(string userEmail)
+        {
+            return context.Users.Where(x => x.Email == userEmail).FirstOrDefault();
+        }
+
         public bool UpdateUser(User user)
         {
             try
