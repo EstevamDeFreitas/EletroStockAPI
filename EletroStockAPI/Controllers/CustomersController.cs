@@ -130,6 +130,7 @@ namespace EletroStockAPI.Controllers
             try
             {
                 var customerEntity = _mapper.Map<Customer>(customer);
+                customerEntity.BirthDate = EntityHelper.ConvertDatetimeToUTC(customerEntity.BirthDate);
                 _customerRepository.UpdateCustomer(customerEntity);
 
                 return Ok(new MessageBase<object>

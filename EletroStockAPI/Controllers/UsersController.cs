@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EletroStockAPI.Context.Models;
 using EletroStockAPI.Context.Repositories.Interfaces;
 using EletroStockAPI.Models;
 using EletroStockAPI.Models.Shared;
@@ -49,9 +50,9 @@ namespace EletroStockAPI.Controllers
 
             var result = _usersRepository.CreateUser(newUser);
 
-            return Ok(new
+            return Ok(new MessageBase<User>
             {
-                Success = result,
+                Result = newUser,
                 Message = "Usúario criado com sucesso!"
             });
         }
