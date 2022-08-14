@@ -3,7 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EletroStockAPI", "EletroStockAPI\EletroStockAPI.csproj", "{7FBA7119-9D06-4065-8F16-52BD3B4B4B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletroStockAPI", "EletroStockAPI\EletroStockAPI.csproj", "{7FBA7119-9D06-4065-8F16-52BD3B4B4B86}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AD0D3B6C-A59E-4A55-BBD5-71D1425A74B7} = {AD0D3B6C-A59E-4A55-BBD5-71D1425A74B7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{40D39E5E-7652-4D40-9BB8-C29390B60788}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{8F08C35F-FFC5-4560-A7DF-8AFF778F8B5B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{40D39E5E-7652-4D40-9BB8-C29390B60788} = {40D39E5E-7652-4D40-9BB8-C29390B60788}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{AD0D3B6C-A59E-4A55-BBD5-71D1425A74B7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F08C35F-FFC5-4560-A7DF-8AFF778F8B5B} = {8F08C35F-FFC5-4560-A7DF-8AFF778F8B5B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +30,18 @@ Global
 		{7FBA7119-9D06-4065-8F16-52BD3B4B4B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FBA7119-9D06-4065-8F16-52BD3B4B4B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FBA7119-9D06-4065-8F16-52BD3B4B4B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D39E5E-7652-4D40-9BB8-C29390B60788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D39E5E-7652-4D40-9BB8-C29390B60788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D39E5E-7652-4D40-9BB8-C29390B60788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D39E5E-7652-4D40-9BB8-C29390B60788}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F08C35F-FFC5-4560-A7DF-8AFF778F8B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F08C35F-FFC5-4560-A7DF-8AFF778F8B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F08C35F-FFC5-4560-A7DF-8AFF778F8B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F08C35F-FFC5-4560-A7DF-8AFF778F8B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0D3B6C-A59E-4A55-BBD5-71D1425A74B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0D3B6C-A59E-4A55-BBD5-71D1425A74B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0D3B6C-A59E-4A55-BBD5-71D1425A74B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0D3B6C-A59E-4A55-BBD5-71D1425A74B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
