@@ -28,7 +28,7 @@ namespace Domain.Entities
         [MaxLength(1)]
         public char Gender { get; set; }
         [Required]
-        [Column("etk_gender")]
+        [Column("etk_birth_date")]
         public DateTime BirthDate { get; set; }
         [Required]
         [Column("etk_cpf")]
