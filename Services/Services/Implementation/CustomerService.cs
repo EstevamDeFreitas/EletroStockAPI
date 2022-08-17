@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Persistence.Repositories.Interfaces;
 using Services.DTO;
+using Services.Exceptions.Customer;
 using Services.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -44,9 +45,14 @@ namespace Services.Services.Implementation
 
         public void DeleteCustomer(string email)
         {
-            var customerFound = _repository.CustomerRepository.FindByCondition(x => x.Email.ToLower() == email.ToLower());
+            var customerFound = _repository.CustomerRepository.FindByCondition(x => x.Email.ToLower() == email.ToLower()).FirstOrDefault();
 
-            _repository.CustomerRepository.Delete((Customer)customerFound);
+            if (customerFound is null)
+            {
+                throw new CustomerNotFound();
+            }
+
+            _repository.CustomerRepository.Delete(customerFound);
             _repository.Save();
         }
 
@@ -71,21 +77,44 @@ namespace Services.Services.Implementation
             return customerFound;
         }
 
+        public List<CustomerDTO> GetCustomers()
+        {
+            var customersList = _repository.CustomerRepository.GetAll().Select(x => new CustomerDTO
+                                                                                {
+                                                                                    BirthDate = x.BirthDate,
+                                                                                    CPF = x.CPF,
+                                                                                    Email = x.Email,
+                                                                                    Gender = x.Gender,
+                                                                                    Name = x.Name,
+                                                                                    PhoneCode = x.PhoneCode,
+                                                                                    PhoneType = x.PhoneType,
+                                                                                    PhoneNumber = x.PhoneNumber,
+                                                                                    Ranking = x.Ranking
+                                                                                }).ToList();
+
+            return customersList;
+        }
+
         public void UpdateCustomer(CustomerDTO customer)
         {
-            var customerUpdate = new Customer
+            var customerUpdate = _repository.CustomerRepository.FindByCondition(x => x.Email.ToLower() == customer.Email.ToLower()).FirstOrDefault();
+
+            //TODO alterar validação para considerar a senha antiga
+            if(customerUpdate is null)
             {
-                BirthDate = customer.BirthDate,
-                CPF = customer.CPF,
-                Email = customer.Email,
-                Gender = customer.Gender,
-                Name = customer.Name,
-                Password = customer.Password,
-                PhoneCode = customer.PhoneCode,
-                PhoneNumber = customer.PhoneNumber,
-                PhoneType = customer.PhoneType,
-                Ranking = customer.Ranking
-            };
+                throw new CustomerNotFound();
+            }
+
+            customerUpdate.BirthDate = customer.BirthDate;
+            customerUpdate.CPF = customer.CPF;
+            customerUpdate.Email = customer.Email;
+            customerUpdate.Gender = customer.Gender;
+            customerUpdate.Name = customer.Name;
+            customerUpdate.Password = customer.Password;
+            customerUpdate.PhoneCode = customer.PhoneCode;
+            customerUpdate.PhoneNumber = customer.PhoneNumber;
+            customerUpdate.PhoneType = customer.PhoneType;
+            customerUpdate.Ranking = customer.Ranking;
 
             _repository.CustomerRepository.Update(customerUpdate);
             _repository.Save();
