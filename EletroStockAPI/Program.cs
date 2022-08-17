@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Database;
+using Persistence.Repositories.Implementation;
+using Persistence.Repositories.Interfaces;
+using Services.Services.Implementation;
+using Services.Services.Interfaces;
 
 namespace EletroStockAPI
 {
@@ -18,12 +22,17 @@ namespace EletroStockAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<IServiceWrapper, ServiceWrapper>();
+            builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+
             builder.Services.AddDbContext<EletroStockContext>(options =>
             {
                 options.UseNpgsql(configuration["ConnectionStrings:DbConnection"]);
             });
 
             var app = builder.Build();
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

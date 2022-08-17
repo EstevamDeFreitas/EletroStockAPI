@@ -11,23 +11,14 @@ namespace Persistence.Repositories.Implementation
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private EletroStockContext _dbContext;
-        private ICustomerRepository _customerRepository;
+        private readonly Lazy<ICustomerRepository> _customerRepository;
         public RepositoryWrapper(EletroStockContext dbContext)
         {
             _dbContext = dbContext;
+            _customerRepository = new Lazy<ICustomerRepository>(() => new CustomerRepository(dbContext));
         }
 
-        public ICustomerRepository CustomerRepository
-        {
-            get
-            {
-                if (_customerRepository is null)
-                {
-                    _customerRepository = new CustomerRepository(_dbContext);
-                }
-                return _customerRepository;
-            }
-        }
+        public ICustomerRepository CustomerRepository => _customerRepository.Value;
 
         public void Save()
         {

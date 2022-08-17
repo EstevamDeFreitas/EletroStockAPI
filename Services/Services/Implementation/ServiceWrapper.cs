@@ -13,7 +13,7 @@ namespace Services.Services.Implementation
         private readonly Lazy<ICustomerService> _customerService;
         public ServiceWrapper(IRepositoryWrapper repository)
         {
-            _customerService = new Lazy<ICustomerService>(() => new CustomerService());
+            _customerService = new Lazy<ICustomerService>(() => new CustomerService(repository));
         }
         public ICustomerService CustomerService => _customerService.Value;
     }
