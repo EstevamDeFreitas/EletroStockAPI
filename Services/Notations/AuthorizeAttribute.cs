@@ -21,7 +21,7 @@ namespace Services.Notations
 
             try
             {
-                var user = (Guid)context.HttpContext.Items["User"];
+                var user = Guid.Parse((string)context.HttpContext.Items["User"]);
                 if (user == null)
                 {
                     context.Result = new JsonResult(new { message = "Unauthorized" })

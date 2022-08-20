@@ -9,7 +9,7 @@ namespace Services.DTO
 {
     public class AddressDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string AddressType { get; set; }
         public string StreetType { get; set; }
         public string Description { get; set; }

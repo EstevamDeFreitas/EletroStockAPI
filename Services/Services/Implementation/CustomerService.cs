@@ -2,6 +2,7 @@
 using Persistence.Repositories.Interfaces;
 using Services.DTO;
 using Services.Exceptions.Customer;
+using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -93,6 +94,18 @@ namespace Services.Services.Implementation
                                                                                 }).ToList();
 
             return customersList;
+        }
+
+        public Guid LoginCustomer(string email, string password)
+        {
+            var customerFound = _repository.CustomerRepository.FindByCondition(x => x.Email.ToLower() == email.ToLower() && x.Password == password).FirstOrDefault();
+
+            if(customerFound is null)
+            {
+                throw new NotFound("Customer");
+            }
+
+            return customerFound.Id;
         }
 
         public void UpdateCustomer(CustomerDTO customer)

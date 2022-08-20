@@ -11,6 +11,7 @@ namespace Services.Services.Interfaces
     {
         CustomerDTO GetCustomer(string email);
         List<CustomerDTO> GetCustomers();
+        Guid LoginCustomer(string email, string password);
         void CreateCustomer(CustomerDTO customer);
         void UpdateCustomer(CustomerDTO customer);
         void DeleteCustomer(string email);

@@ -19,6 +19,6 @@ namespace Services.Services.Implementation
         }
         public ICustomerService CustomerService => _customerService.Value;
 
-        public IAddressService AddressService => throw new NotImplementedException();
+        public IAddressService AddressService => _addressService.Value;
     }
 }
