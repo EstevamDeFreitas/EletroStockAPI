@@ -9,5 +9,6 @@ namespace Services.Services.Interfaces
     public interface IServiceWrapper
     {
         ICustomerService CustomerService { get; }
+        IAddressService AddressService { get; }
     }
 }
