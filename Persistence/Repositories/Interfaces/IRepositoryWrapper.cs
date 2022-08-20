@@ -9,6 +9,7 @@ namespace Persistence.Repositories.Interfaces
     public interface IRepositoryWrapper
     {
         ICustomerRepository CustomerRepository { get; }
+        IAddressRepository AddressRepository { get; }
         void Save();
     }
 }
