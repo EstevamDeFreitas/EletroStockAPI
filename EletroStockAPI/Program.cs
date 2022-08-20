@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Database;
 using Persistence.Repositories.Implementation;
 using Persistence.Repositories.Interfaces;
+using Services.Middleware;
 using Services.Services.Implementation;
 using Services.Services.Interfaces;
 
@@ -30,6 +31,18 @@ namespace EletroStockAPI
                 options.UseNpgsql(configuration["ConnectionStrings:DbConnection"]);
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowAll",
+                                    policy =>
+                                    {
+                                        policy.AllowAnyOrigin();
+                                        policy.AllowAnyMethod();
+                                        policy.AllowAnyHeader();
+                                    }
+                                        );
+            });
+
             var app = builder.Build();
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -40,6 +53,10 @@ namespace EletroStockAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors("AllowAll");
+
+            app.UseMiddleware<AuthMiddleware>();
 
             app.UseHttpsRedirection();
 

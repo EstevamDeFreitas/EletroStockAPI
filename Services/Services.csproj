@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\Address\" />
-    <Folder Include="Middleware\" />
     <Folder Include="Notations\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
