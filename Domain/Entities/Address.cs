@@ -40,5 +40,10 @@ namespace Domain.Entities
         [Column("country")]
         [MaxLength(50)]
         public string Country { get; set; }
+        [Column("customer_id")]
+        public Guid CustomerId { get; set; }
+
+        public Customer Customer { get; set; }
+
     }
 }

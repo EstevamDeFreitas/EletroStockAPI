@@ -49,5 +49,7 @@ namespace Domain.Entities
         [Required]
         [Column("ranking")]
         public int Ranking { get; set; }
+
+        public List<Address> Addresses { get; set; }
     }
 }

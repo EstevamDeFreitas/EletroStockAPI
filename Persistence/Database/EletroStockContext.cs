@@ -11,6 +11,7 @@ namespace Persistence.Database
     public class EletroStockContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public EletroStockContext(DbContextOptions<EletroStockContext> options) : base(options)
         {
 
