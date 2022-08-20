@@ -11,13 +11,13 @@ namespace Domain.Entities
     public class EntityBase
     {
         [Key]
-        [Column("etk_id")]
+        [Column("id")]
         public Guid Id { get; set; }
         [Required]
-        [Column("etk_dt_creation")]
+        [Column("dt_creation")]
         public DateTime DateCreation { get; set; }
         [Required]
-        [Column("etk_dt_modified")]
+        [Column("dt_modified")]
         public DateTime DateModification { get; set; }
 
         public void Generate()

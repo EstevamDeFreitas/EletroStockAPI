@@ -12,42 +12,42 @@ namespace Domain.Entities
     public class Customer : EntityBase
     {
         [Required]
-        [Column("etk_email")]
+        [Column("email")]
         [MaxLength(50)]
         public string Email { get; set; }
         [Required]
-        [Column("etk_password")]
+        [Column("password")]
         [MaxLength(255), MinLength(8)]
         public string Password { get; set; }
         [Required]
-        [Column("etk_name")]
+        [Column("name")]
         [MaxLength(255)]
         public string Name { get; set; }
         [Required]
-        [Column("etk_gender")]
+        [Column("gender")]
         [MaxLength(1)]
         public char Gender { get; set; }
         [Required]
-        [Column("etk_birth_date")]
+        [Column("birth_date")]
         public DateTime BirthDate { get; set; }
         [Required]
-        [Column("etk_cpf")]
+        [Column("cpf")]
         [StringLength(11)]
         public string CPF { get; set; }
         [Required]
-        [Column("etk_phone_type")]
+        [Column("phone_type")]
         [MaxLength(30)]
         public string PhoneType { get; set; }
         [Required]
-        [Column("etk_phone_code")]
+        [Column("phone_code")]
         [MaxLength(3)]
         public decimal PhoneCode { get; set; }
         [Required]
-        [Column("etk_phone_number")]
+        [Column("phone_number")]
         [MaxLength(9)]
         public decimal PhoneNumber { get; set; }
         [Required]
-        [Column("etk_ranking")]
+        [Column("ranking")]
         public int Ranking { get; set; }
     }
 }

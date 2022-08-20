@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Database;
@@ -11,9 +12,10 @@ using Persistence.Database;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(EletroStockContext))]
-    partial class EletroStockContextModelSnapshot : ModelSnapshot
+    [Migration("20220820000606_change-customer")]
+    partial class changecustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,7 @@ namespace Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnName("etk_id");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("timestamp with time zone")
@@ -41,11 +43,11 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("DateCreation")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("dt_creation");
+                        .HasColumnName("etk_dt_creation");
 
                     b.Property<DateTime>("DateModification")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("dt_modified");
+                        .HasColumnName("etk_dt_modified");
 
                     b.Property<string>("Email")
                         .IsRequired()
