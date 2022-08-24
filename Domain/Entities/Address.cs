@@ -55,6 +55,6 @@ namespace Domain.Entities
         public Guid CustomerId { get; set; }
 
         public Customer Customer { get; set; }
-
+        public CustomerAccount CustomerAccount { get; set; }
     }
 }

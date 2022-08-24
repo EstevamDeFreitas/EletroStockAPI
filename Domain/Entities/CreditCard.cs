@@ -30,5 +30,6 @@ namespace Domain.Entities
 
         public CardFlag CardFlag { get; set; }
         public Customer Customer { get; set; }
+        public CustomerAccount CustomerAccount { get; set; }
     }
 }

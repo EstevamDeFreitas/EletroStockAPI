@@ -50,6 +50,7 @@ namespace Domain.Entities
         [Column("ranking")]
         public int Ranking { get; set; }
 
+        public CustomerAccount CustomerAccount { get; set; }
         public List<Address> Addresses { get; set; }
         public List<CreditCard> CreditCards { get; set; }
     }
