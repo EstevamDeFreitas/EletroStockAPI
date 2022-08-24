@@ -13,16 +13,24 @@ namespace Persistence.Repositories.Implementation
         private EletroStockContext _dbContext;
         private readonly Lazy<ICustomerRepository> _customerRepository;
         private readonly Lazy<IAddressRepository> _addressRepository;
+        private readonly Lazy<ICardFlagRepository> _cardFlagRepository;
+        private readonly Lazy<ICreditCardRepository> _creditCardRepository;
         public RepositoryWrapper(EletroStockContext dbContext)
         {
             _dbContext = dbContext;
             _customerRepository = new Lazy<ICustomerRepository>(() => new CustomerRepository(dbContext));
             _addressRepository = new Lazy<IAddressRepository>(() => new AddressRepository(dbContext));
+            _cardFlagRepository = new Lazy<ICardFlagRepository>(() => new CardFlagRepository(dbContext));
+            _creditCardRepository = new Lazy<ICreditCardRepository>(() => new CreditCardRepository(dbContext));
         }
 
         public ICustomerRepository CustomerRepository => _customerRepository.Value;
 
         public IAddressRepository AddressRepository => _addressRepository.Value;
+
+        public ICreditCardRepository CreditCardRepository => _creditCardRepository.Value;
+
+        public ICardFlagRepository CardFlagRepository => _cardFlagRepository.Value;
 
         public void Save()
         {
