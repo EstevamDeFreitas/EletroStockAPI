@@ -51,5 +51,6 @@ namespace Domain.Entities
         public int Ranking { get; set; }
 
         public List<Address> Addresses { get; set; }
+        public List<CreditCard> CreditCards { get; set; }
     }
 }

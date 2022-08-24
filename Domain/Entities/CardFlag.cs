@@ -15,5 +15,7 @@ namespace Domain.Entities
         [Column("name")]
         [StringLength(75)]
         public string Name { get; set; }
+
+        public List<CreditCard> CreditCards { get; set; }
     }
 }
