@@ -12,6 +12,8 @@ namespace Persistence.Database
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<CardFlag> CardFlags { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
         public EletroStockContext(DbContextOptions<EletroStockContext> options) : base(options)
         {
 
