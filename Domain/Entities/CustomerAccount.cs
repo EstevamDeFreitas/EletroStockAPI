@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    [Table("etk_customer_account")]
+    [Table("etk_customer_accounts")]
     public class CustomerAccount : EntityBase
     {
         [Required]

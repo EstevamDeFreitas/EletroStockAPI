@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Database;
@@ -11,9 +12,10 @@ using Persistence.Database;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(EletroStockContext))]
-    partial class EletroStockContextModelSnapshot : ModelSnapshot
+    [Migration("20220824111646_credit-card-creation")]
+    partial class creditcardcreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,8 +142,7 @@ namespace Persistence.Migrations
                         .HasColumnName("id");
 
                     b.Property<Guid>("CardFlagId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("card_flag_id");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("CardNumber")
                         .IsRequired()
@@ -150,8 +151,7 @@ namespace Persistence.Migrations
                         .HasColumnName("card_number");
 
                     b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("customer_id");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateCreation")
                         .HasColumnType("timestamp with time zone")

@@ -24,8 +24,10 @@ namespace Domain.Entities
         [StringLength(3)]
         public string SecurityCode { get; set; }
         [Required]
+        [Column("customer_id")]
         public Guid CustomerId { get; set; }
         [Required]
+        [Column("card_flag_id")]
         public Guid CardFlagId { get; set; }
 
         public CardFlag CardFlag { get; set; }
