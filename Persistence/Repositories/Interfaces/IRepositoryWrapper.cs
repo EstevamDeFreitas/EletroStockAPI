@@ -12,6 +12,7 @@ namespace Persistence.Repositories.Interfaces
         IAddressRepository AddressRepository { get; }
         ICreditCardRepository CreditCardRepository { get; }
         ICardFlagRepository CardFlagRepository { get; }
+        ICustomerAccountRepository CustomerAccountRepository { get; }
         void Save();
     }
 }
