@@ -12,13 +12,17 @@ namespace Services.Services.Implementation
     {
         private readonly Lazy<ICustomerService> _customerService;
         private readonly Lazy<IAddressService> _addressService;
+        private readonly Lazy<ICardFlagService> _cardFlagService;
         public ServiceWrapper(IRepositoryWrapper repository)
         {
             _customerService = new Lazy<ICustomerService>(() => new CustomerService(repository));
             _addressService = new Lazy<IAddressService>(() => new AddressService(repository));
+            _cardFlagService = new Lazy<ICardFlagService>(() => new CardFlagService(repository));
         }
         public ICustomerService CustomerService => _customerService.Value;
 
         public IAddressService AddressService => _addressService.Value;
+
+        public ICardFlagService CardFlagService => throw new NotImplementedException();
     }
 }

@@ -12,13 +12,10 @@ using System.Threading.Tasks;
 
 namespace Services.Services.Implementation
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService : ServiceBase, ICustomerService
     {
-        private IRepositoryWrapper _repository;
-
-        public CustomerService(IRepositoryWrapper repository)
+        public CustomerService(IRepositoryWrapper repository) : base(repository)
         {
-            _repository = repository;
         }
 
         public void CreateCustomer(CustomerDTO customer)

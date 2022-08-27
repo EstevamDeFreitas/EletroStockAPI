@@ -11,13 +11,10 @@ using System.Threading.Tasks;
 
 namespace Services.Services.Implementation
 {
-    public class AddressService : IAddressService
+    public class AddressService : ServiceBase, IAddressService
     {
-        private IRepositoryWrapper _repository;
-
-        public AddressService(IRepositoryWrapper repository)
+        public AddressService(IRepositoryWrapper repository) : base(repository)
         {
-            _repository = repository;
         }
 
         public void CreateAddress(AddressDTO addressDTO)
