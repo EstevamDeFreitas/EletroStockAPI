@@ -10,9 +10,9 @@ namespace Services.Services.Interfaces
     public interface ICardFlagService
     {
         List<CardFlagDTO> GetCardFlags();
-        CardFlagDTO GetCardFlag(Guid cardId);
+        CardFlagDTO GetCardFlag(Guid cardFlagId);
         void CreateCardFlag(string name);
         void UpdateCardFlag(CardFlagDTO cardFlag);
-        void DeleteCardFlag(Guid cardId);
+        void DeleteCardFlag(Guid cardFlagId);
     }
 }

@@ -1,5 +1,7 @@
-﻿using Persistence.Repositories.Interfaces;
+﻿using Domain.Entities;
+using Persistence.Repositories.Interfaces;
 using Services.DTO;
+using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,27 +19,79 @@ namespace Services.Services.Implementation
 
         public void CreateCardFlag(string name)
         {
-            throw new NotImplementedException();
+            var flagExists = _repository.CardFlagRepository.FindByCondition(x => x.Name.ToLower() == name.ToLower());
+
+            if(flagExists is not null)
+            {
+                throw new AlreadyExists("Card Flag", name);
+            }
+
+            var newCardFlag = new CardFlag()
+            {
+                Name = name
+            };
+
+            newCardFlag.Generate();
+
+            _repository.CardFlagRepository.Create(newCardFlag);
+            _repository.Save();
         }
 
-        public void DeleteCardFlag(Guid cardId)
+        public void DeleteCardFlag(Guid cardFlagId)
         {
-            throw new NotImplementedException();
+            var cardFlag = _repository.CardFlagRepository.FindByCondition(x => x.Id == cardFlagId).FirstOrDefault();
+
+            if(cardFlag is null)
+            {
+                throw new NotFound("Card Flag");
+            }
+
+            _repository.CardFlagRepository.Delete(cardFlag);
+            _repository.Save();
         }
 
-        public CardFlagDTO GetCardFlag(Guid cardId)
+        public CardFlagDTO GetCardFlag(Guid cardFlagId)
         {
-            throw new NotImplementedException();
+            var cardFlag = _repository.CardFlagRepository.FindByCondition(x => x.Id == cardFlagId).FirstOrDefault();
+
+            if (cardFlag is null)
+            {
+                throw new NotFound("Card Flag");
+            }
+
+            var cardFlagDTO = new CardFlagDTO
+            {
+                Id = cardFlag.Id,
+                Name = cardFlag.Name
+            };
+
+            return cardFlagDTO;
         }
 
         public List<CardFlagDTO> GetCardFlags()
         {
-            throw new NotImplementedException();
+            var cardFlags = _repository.CardFlagRepository.GetAll().Select(x => new CardFlagDTO
+            {
+                Name = x.Name,
+                Id = x.Id
+            }).ToList();
+
+            return cardFlags;
         }
 
         public void UpdateCardFlag(CardFlagDTO cardFlag)
         {
-            throw new NotImplementedException();
+            var cardFlagFound = _repository.CardFlagRepository.FindByCondition(x => x.Id == cardFlag.Id).FirstOrDefault();
+
+            if (cardFlagFound is null)
+            {
+                throw new NotFound("Card Flag");
+            }
+
+            cardFlagFound.Name = cardFlag.Name;
+
+            _repository.CardFlagRepository.Update(cardFlagFound);
+            _repository.Save();
         }
     }
 }
