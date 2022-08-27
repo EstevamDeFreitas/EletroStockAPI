@@ -23,6 +23,6 @@ namespace Services.Services.Implementation
 
         public IAddressService AddressService => _addressService.Value;
 
-        public ICardFlagService CardFlagService => throw new NotImplementedException();
+        public ICardFlagService CardFlagService => _cardFlagService.Value;
     }
 }

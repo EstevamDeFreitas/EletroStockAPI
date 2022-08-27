@@ -19,7 +19,7 @@ namespace Services.Services.Implementation
 
         public void CreateCardFlag(string name)
         {
-            var flagExists = _repository.CardFlagRepository.FindByCondition(x => x.Name.ToLower() == name.ToLower());
+            var flagExists = _repository.CardFlagRepository.FindByCondition(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault();
 
             if(flagExists is not null)
             {
