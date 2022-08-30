@@ -89,6 +89,7 @@ namespace Services.Services.Implementation
             }
 
             cardFlagFound.Name = cardFlag.Name;
+            cardFlagFound.DateModification = DateTime.Now;
 
             _repository.CardFlagRepository.Update(cardFlagFound);
             _repository.Save();

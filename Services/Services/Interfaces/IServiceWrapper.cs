@@ -11,5 +11,6 @@ namespace Services.Services.Interfaces
         ICustomerService CustomerService { get; }
         IAddressService AddressService { get; }
         ICardFlagService CardFlagService { get; }
+        ICreditCardService CardCreditCardService { get; }
     }
 }

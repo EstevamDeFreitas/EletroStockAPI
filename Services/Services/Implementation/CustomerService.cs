@@ -125,6 +125,7 @@ namespace Services.Services.Implementation
             customerUpdate.PhoneNumber = customer.PhoneNumber;
             customerUpdate.PhoneType = customer.PhoneType;
             customerUpdate.Ranking = customer.Ranking;
+            customerUpdate.DateModification = DateTime.Now;
 
             _repository.CustomerRepository.Update(customerUpdate);
             _repository.Save();
