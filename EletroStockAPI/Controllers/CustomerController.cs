@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.DTO;
 using Services.Services.Interfaces;
+using Services.Utilities;
 
 namespace EletroStockAPI.Controllers
 {
@@ -25,7 +26,7 @@ namespace EletroStockAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
 
@@ -40,7 +41,7 @@ namespace EletroStockAPI.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
 
@@ -56,7 +57,7 @@ namespace EletroStockAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
 
@@ -71,7 +72,7 @@ namespace EletroStockAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
 
@@ -87,7 +88,7 @@ namespace EletroStockAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
     }
