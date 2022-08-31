@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Persistence.Repositories.Interfaces;
 using Services.DTO;
+using Services.Exceptions.Address;
 using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
 using System;
@@ -38,6 +39,22 @@ namespace Services.Services.Implementation
 
             _repository.AddressRepository.Create(addressCreate);
             _repository.Save();
+
+            if (_repository.AddressRepository.FindByCondition(x => x.CustomerId == addressCreate.CustomerId).ToList().Count() == 0)
+            {
+                var customerAccount = _repository.CustomerAccountRepository.FindByCondition(x => x.CustomerId == addressCreate.CustomerId).FirstOrDefault();
+
+                if(customerAccount is not null)
+                {
+                    customerAccount.DefaultChargeAddressId = addressCreate.Id;
+                    customerAccount.DefaultDeliveryAddressId = addressCreate.Id;
+
+                    _repository.CustomerAccountRepository.Update(customerAccount);
+                    _repository.Save();
+                }
+
+                
+            }
         }
 
         public void DeleteAddress(Guid addressId)
@@ -49,8 +66,15 @@ namespace Services.Services.Implementation
                 throw new NotFound("Address");
             }
 
+            if(_repository.CustomerAccountRepository.FindByCondition(x => x.DefaultChargeAddressId == addressDelete.Id || x.DefaultDeliveryAddressId == addressDelete.Id).FirstOrDefault() is not null)
+            {
+                throw new AddressIsSetAsDefault();
+            }
+
             _repository.AddressRepository.Delete(addressDelete);
             _repository.Save();
+
+
         }
 
         public AddressDTO GetAddress(Guid addressId)

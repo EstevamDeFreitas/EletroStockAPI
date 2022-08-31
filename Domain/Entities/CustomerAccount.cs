@@ -14,19 +14,19 @@ namespace Domain.Entities
         [Required]
         [Column("customer_id")]
         public Guid CustomerId { get; set; }
-        [Required]
+        
         [Column("default_charge_address_id")]
-        public Guid DefaultChargeAddressId { get; set; }
-        [Required]
+        public Guid? DefaultChargeAddressId { get; set; }
+        
         [Column("default_delivery_address_id")]
-        public Guid DefaultDeliveryAddressId { get; set; }
-        [Required]
+        public Guid? DefaultDeliveryAddressId { get; set; }
+        
         [Column("default_credit_card_id")]
-        public Guid DefaultCreditCardId { get; set; }
+        public Guid? DefaultCreditCardId { get; set; }
 
         public Customer Customer { get; set; }
-        public Address DefaultChargeAddress { get; set; }
-        public Address DefaultDeliveryAddress { get; set; }
+        public virtual Address DefaultChargeAddress { get; set; }
+        public virtual Address DefaultDeliveryAddress { get; set; }
         public CreditCard DefaultCreditCard { get; set; }
     }
 }

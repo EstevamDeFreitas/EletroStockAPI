@@ -13,15 +13,16 @@ namespace Persistence.Mapping
     {
         public void Configure(EntityTypeBuilder<CustomerAccount> builder)
         {
-            builder.HasOne(x => x.DefaultChargeAddress)
-                    .WithOne(x => x.DefaultChargeAddressCustomerAccount)
-                    .HasForeignKey<CustomerAccount>(x => x.DefaultChargeAddressId)
-                    .OnDelete(DeleteBehavior.NoAction);
+            //Removido para permitir que endereço seja opcional durante a criação da conta
+            //builder.HasOne(x => x.DefaultChargeAddress)
+            //        .WithOne(x => x.DefaultChargeAddressCustomerAccount)
+            //        .HasForeignKey<CustomerAccount>(x => x.DefaultChargeAddressId)
+            //        .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(x => x.DefaultDeliveryAddress)
-                    .WithOne(x => x.DefaultDeliveryAddressCustomerAccount)
-                    .HasForeignKey<CustomerAccount>(x => x.DefaultDeliveryAddressId)
-                    .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(x => x.DefaultDeliveryAddress)
+            //        .WithOne(x => x.DefaultDeliveryAddressCustomerAccount)
+            //        .HasForeignKey<CustomerAccount>(x => x.DefaultDeliveryAddressId)
+            //        .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

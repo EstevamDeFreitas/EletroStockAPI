@@ -55,7 +55,9 @@ namespace Domain.Entities
         public Guid CustomerId { get; set; }
 
         public Customer Customer { get; set; }
-        public CustomerAccount DefaultChargeAddressCustomerAccount { get; set; }
-        public CustomerAccount DefaultDeliveryAddressCustomerAccount { get; set; }
+        [NotMapped]
+        public virtual CustomerAccount DefaultChargeAddressCustomerAccount { get; set; }
+        [NotMapped]
+        public virtual CustomerAccount DefaultDeliveryAddressCustomerAccount { get; set; }
     }
 }

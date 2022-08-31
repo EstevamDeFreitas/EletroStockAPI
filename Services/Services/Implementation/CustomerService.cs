@@ -36,8 +36,15 @@ namespace Services.Services.Implementation
 
             customerCreate.Generate();
 
-            //TODO adicionar validação dos campos
+            var customerAccount = new CustomerAccount()
+            {
+                CustomerId = customerCreate.Id
+            };
+
+            customerAccount.Generate();
+
             _repository.CustomerRepository.Create(customerCreate);
+            _repository.CustomerAccountRepository.Create(customerAccount);
             _repository.Save();
         }
 
