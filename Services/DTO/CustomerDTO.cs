@@ -19,4 +19,11 @@ namespace Services.DTO
         public decimal PhoneNumber { get; set; }
         public int Ranking { get; set; }
     }
+
+    public class CustomerChangePasswordDTO
+    {
+        public string Email { get; set; }
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
+    }
 }

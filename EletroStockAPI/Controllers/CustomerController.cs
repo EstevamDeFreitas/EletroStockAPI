@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.DTO;
+using Services.Notations;
 using Services.Services.Interfaces;
 using Services.Utilities;
 
@@ -16,6 +17,7 @@ namespace EletroStockAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetCustomersList()
         {
             try
@@ -47,6 +49,7 @@ namespace EletroStockAPI.Controllers
 
         [Route("{email}")]
         [HttpGet]
+        [Authorize]
         public IActionResult GetCustomer(string email)
         {
             try
@@ -62,6 +65,7 @@ namespace EletroStockAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public IActionResult UpdateCustomer([FromBody] CustomerDTO customer)
         {
             try
@@ -78,11 +82,29 @@ namespace EletroStockAPI.Controllers
 
         [Route("{email}")]
         [HttpDelete]
+        [Authorize]
         public IActionResult DeleteCustomer(string email)
         {
             try
             {
                 _services.CustomerService.DeleteCustomer(email);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
+
+        [Route("password")]
+        [HttpPut]
+        [Authorize]
+        public IActionResult ChangePassword(CustomerChangePasswordDTO customerChangePassword)
+        {
+            try
+            {
+                _services.CustomerService.ChangePassword(customerChangePassword);
 
                 return Ok();
             }

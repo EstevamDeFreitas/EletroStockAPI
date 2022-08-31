@@ -109,7 +109,6 @@ namespace Services.Services.Implementation
         {
             var customerUpdate = _repository.CustomerRepository.FindByCondition(x => x.Email.ToLower() == customer.Email.ToLower()).FirstOrDefault();
 
-            //TODO alterar validação para considerar a senha antiga
             if(customerUpdate is null)
             {
                 throw new CustomerNotFound();
@@ -120,12 +119,27 @@ namespace Services.Services.Implementation
             customerUpdate.Email = customer.Email;
             customerUpdate.Gender = customer.Gender;
             customerUpdate.Name = customer.Name;
-            customerUpdate.Password = customer.Password;
+            //customerUpdate.Password = customer.Password;
             customerUpdate.PhoneCode = customer.PhoneCode;
             customerUpdate.PhoneNumber = customer.PhoneNumber;
             customerUpdate.PhoneType = customer.PhoneType;
             customerUpdate.Ranking = customer.Ranking;
             customerUpdate.DateModification = DateTime.Now;
+
+            _repository.CustomerRepository.Update(customerUpdate);
+            _repository.Save();
+        }
+
+        public void ChangePassword(CustomerChangePasswordDTO customerChangePassword)
+        {
+            var customerUpdate = _repository.CustomerRepository.FindByCondition(x => x.Email.ToLower() == customerChangePassword.Email.ToLower() && x.Password == customerChangePassword.CurrentPassword).FirstOrDefault();
+
+            if (customerUpdate is null)
+            {
+                throw new CustomerNotFound();
+            }
+
+            customerUpdate.Password = customerChangePassword.NewPassword;
 
             _repository.CustomerRepository.Update(customerUpdate);
             _repository.Save();

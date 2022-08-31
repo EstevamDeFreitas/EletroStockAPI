@@ -15,5 +15,6 @@ namespace Services.Services.Interfaces
         void CreateCustomer(CustomerDTO customer);
         void UpdateCustomer(CustomerDTO customer);
         void DeleteCustomer(string email);
+        void ChangePassword(CustomerChangePasswordDTO customerChangePassword);
     }
 }
