@@ -9,5 +9,6 @@ namespace Persistence.Repositories.Interfaces
 {
     public interface ICustomerRepository : IRepositoryBase<Customer>
     {
+        Customer? GetCustomer(Guid customerId);
     }
 }

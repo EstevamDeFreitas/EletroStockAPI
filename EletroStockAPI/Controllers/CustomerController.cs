@@ -16,6 +16,7 @@ namespace EletroStockAPI.Controllers
             _services = services;
         }
 
+        [Route("all")]
         [HttpGet]
         [Authorize]
         public IActionResult GetCustomersList()
@@ -47,14 +48,14 @@ namespace EletroStockAPI.Controllers
             }
         }
 
-        [Route("{email}")]
         [HttpGet]
         [Authorize]
-        public IActionResult GetCustomer(string email)
+        public IActionResult GetCustomer()
         {
             try
             {
-                var customer = _services.CustomerService.GetCustomer(email);
+                var user = Guid.Parse((string)HttpContext.Items["User"]);
+                var customer = _services.CustomerService.GetCustomer(user);
 
                 return Ok(customer);
             }
@@ -107,6 +108,22 @@ namespace EletroStockAPI.Controllers
                 _services.CustomerService.ChangePassword(customerChangePassword);
 
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
+
+        [Route("account")]
+        [HttpPut]
+        public IActionResult UpdateAccount(CustomerAccountDTO customerAccount)
+        {
+            try
+            {
+                _services.CustomerService.ChangeAccountSettings(customerAccount);
+
+                return Ok(new Response<object> { Message = "Account Settings Changed" });
             }
             catch (Exception ex)
             {

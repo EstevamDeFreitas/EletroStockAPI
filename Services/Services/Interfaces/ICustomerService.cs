@@ -9,12 +9,13 @@ namespace Services.Services.Interfaces
 {
     public interface ICustomerService
     {
-        CustomerDTO GetCustomer(string email);
+        CustomerDTO GetCustomer(Guid customerId);
         List<CustomerDTO> GetCustomers();
         Guid LoginCustomer(string email, string password);
         void CreateCustomer(CustomerDTO customer);
         void UpdateCustomer(CustomerDTO customer);
         void DeleteCustomer(string email);
         void ChangePassword(CustomerChangePasswordDTO customerChangePassword);
+        void ChangeAccountSettings(CustomerAccountDTO customerAccount);
     }
 }

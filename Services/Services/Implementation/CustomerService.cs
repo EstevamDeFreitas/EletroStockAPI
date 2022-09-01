@@ -61,25 +61,62 @@ namespace Services.Services.Implementation
             _repository.Save();
         }
 
-        public CustomerDTO GetCustomer(string email)
+        public CustomerDTO GetCustomer(Guid customerId)
         {
-            var customerFound = _repository.CustomerRepository.FindByCondition(x => x.Email.ToLower() == email.ToLower())
-                                                                    .Select(x => new CustomerDTO
-                                                                    {
-                                                                        BirthDate = x.BirthDate,
-                                                                        CPF =x.CPF,
-                                                                        Email=x.Email,
-                                                                        Gender=x.Gender,
-                                                                        Name=x.Name,
-                                                                        PhoneCode = x.PhoneCode,    
-                                                                        PhoneType = x.PhoneType,
-                                                                        PhoneNumber = x.PhoneNumber,    
-                                                                        Ranking=x.Ranking
-                                                                    }).FirstOrDefault();
+            var customerFound = _repository.CustomerRepository.GetCustomer(customerId);
 
+            if(customerFound is null)
+            {
+                throw new NotFound("Customer");
+            }
 
+            CustomerDTO customerDto = new CustomerDTO
+            {
+                Email = customerFound.Email,
+                BirthDate = customerFound.BirthDate,
+                CPF = customerFound.CPF,
+                CustomerAccount = new CustomerAccountDTO
+                {
+                    CustomerId = customerFound.CustomerAccount.CustomerId,
+                    DefaultChargeAddressId = customerFound.CustomerAccount.DefaultChargeAddressId,
+                    DefaultCreditCardId = customerFound.CustomerAccount.DefaultCreditCardId,
+                    DefaultDeliveryAddressId = customerFound.CustomerAccount.DefaultDeliveryAddressId,
+                    Id = customerFound.CustomerAccount.Id
+                },
+                Gender = customerFound.Gender,
+                Name = customerFound.Name,
+                Password = customerFound.Password,
+                PhoneCode = customerFound.PhoneCode,
+                PhoneNumber = customerFound.PhoneNumber,
+                PhoneType = customerFound.PhoneType,
+                Ranking = customerFound.Ranking,
+                Addresses = customerFound.Addresses.Select(x => new AddressDTO 
+                { 
+                    AddressType = x.AddressType,
+                    CEP = x.CEP,
+                    City = x.City,
+                    Country = x.Country,
+                    CustomerId = x.CustomerId,
+                    Description = x.Description,
+                    District = x.District,
+                    Id = x.Id,
+                    Number = x.Number,
+                    State = x.State,
+                    Street = x.Street,
+                    StreetType = x.StreetType
+                }).ToList(),
+                CreditCards = customerFound.CreditCards.Select(x => new CreditCardDTO 
+                { 
+                    CardFlagId = x.CardFlagId,
+                    CardNumber = x.CardNumber,
+                    Id = x.Id,
+                    OwnerName = x.OwnerName,
+                    SecurityCode = x.SecurityCode,
+                    CustomerId = x.CustomerId
+                }).ToList()
+            };
 
-            return customerFound;
+            return customerDto;
         }
 
         public List<CustomerDTO> GetCustomers()
@@ -149,6 +186,23 @@ namespace Services.Services.Implementation
             customerUpdate.Password = customerChangePassword.NewPassword;
 
             _repository.CustomerRepository.Update(customerUpdate);
+            _repository.Save();
+        }
+
+        public void ChangeAccountSettings(CustomerAccountDTO customerAccount)
+        {
+            var customerAccountFound = _repository.CustomerAccountRepository.FindByCondition(x => x.Id == customerAccount.Id).FirstOrDefault();
+
+            if(customerAccountFound is null)
+            {
+                throw new NotFound("Customer Account");
+            }
+
+            customerAccountFound.DefaultCreditCardId = customerAccount.DefaultCreditCardId;
+            customerAccountFound.DefaultChargeAddressId = customerAccount.DefaultChargeAddressId;
+            customerAccountFound.DefaultDeliveryAddressId = customerAccount.DefaultDeliveryAddressId;
+
+            _repository.CustomerAccountRepository.Update(customerAccountFound);
             _repository.Save();
         }
     }

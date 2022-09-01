@@ -40,7 +40,7 @@ namespace Services.Services.Implementation
             _repository.AddressRepository.Create(addressCreate);
             _repository.Save();
 
-            if (_repository.AddressRepository.FindByCondition(x => x.CustomerId == addressCreate.CustomerId).ToList().Count() == 0)
+            if (_repository.AddressRepository.FindByCondition(x => x.CustomerId == addressCreate.CustomerId).ToList().Count() == 1)
             {
                 var customerAccount = _repository.CustomerAccountRepository.FindByCondition(x => x.CustomerId == addressCreate.CustomerId).FirstOrDefault();
 

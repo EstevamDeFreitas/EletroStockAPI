@@ -32,6 +32,21 @@ namespace Services.Services.Implementation
 
             _repository.CreditCardRepository.Create(newCreditCard);
             _repository.Save();
+
+            if (_repository.CreditCardRepository.FindByCondition(x => x.CustomerId == newCreditCard.CustomerId).ToList().Count() == 1)
+            {
+                var customerAccount = _repository.CustomerAccountRepository.FindByCondition(x => x.CustomerId == newCreditCard.CustomerId).FirstOrDefault();
+
+                if (customerAccount is not null)
+                {
+                    customerAccount.DefaultCreditCardId = newCreditCard.Id;
+
+                    _repository.CustomerAccountRepository.Update(customerAccount);
+                    _repository.Save();
+                }
+
+
+            }
         }
 
         public void DeleteCustomerCreditCard(Guid cardId)

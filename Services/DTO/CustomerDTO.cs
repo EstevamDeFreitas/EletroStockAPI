@@ -18,6 +18,9 @@ namespace Services.DTO
         public decimal PhoneCode { get; set; }
         public decimal PhoneNumber { get; set; }
         public int Ranking { get; set; }
+        public CustomerAccountDTO? CustomerAccount { get; set; }
+        public List<AddressDTO>? Addresses { get; set; }
+        public List<CreditCardDTO>? CreditCards { get; set; }
     }
 
     public class CustomerChangePasswordDTO
