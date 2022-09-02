@@ -14,6 +14,7 @@ namespace Services.DTO
         public string SecurityCode { get; set; }
         public Guid CustomerId { get; set; }
         public Guid CardFlagId { get; set; }
+        public string? CardFlag { get; set; }
     }
 
     public class CreditCardCreateDTO
