@@ -25,7 +25,11 @@ namespace EletroStockAPI.Controllers
             {
                 var customers = _services.CustomerService.GetCustomers();
 
-                return Ok(customers);
+                return Ok(new Response<List<CustomerDTO>>
+                {
+                    Message = "Customers Found",
+                    Data = customers
+                });
             }
             catch (Exception ex)
             {
@@ -57,7 +61,11 @@ namespace EletroStockAPI.Controllers
                 var user = Guid.Parse((string)HttpContext.Items["User"]);
                 var customer = _services.CustomerService.GetCustomer(user);
 
-                return Ok(customer);
+                return Ok(new Response<CustomerDTO>
+                {
+                    Data = customer,
+                    Message = "Customer Found"
+                });
             }
             catch (Exception ex)
             {
