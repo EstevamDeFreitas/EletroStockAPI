@@ -13,7 +13,7 @@ namespace Domain.Entities
     {
         [Required]
         [Column("name")]
-        [StringLength(75)]
+        [MaxLength(32)]
         public string Name { get; set; }
 
         public List<CreditCard> CreditCards { get; set; }
