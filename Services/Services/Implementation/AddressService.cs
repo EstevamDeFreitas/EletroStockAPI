@@ -4,6 +4,7 @@ using Services.DTO;
 using Services.Exceptions.Address;
 using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
+using Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,13 @@ namespace Services.Services.Implementation
             };
 
             addressCreate.Generate();
+
+            var addressValidator = new AddressValidator();
+
+            if (!addressValidator.Validate(addressCreate).IsValid)
+            {
+                throw new ValidationFailed(addressValidator.Validate(addressCreate).Errors, "Address");
+            }
 
             _repository.AddressRepository.Create(addressCreate);
             _repository.Save();
@@ -148,6 +156,13 @@ namespace Services.Services.Implementation
             addressFound.DateModification = DateTime.Now;
             addressFound.Description = addressDTO.Description;
             addressFound.District = addressDTO.District;
+
+            var addressValidator = new AddressValidator();
+
+            if (!addressValidator.Validate(addressFound).IsValid)
+            {
+                throw new ValidationFailed(addressValidator.Validate(addressFound).Errors, "Address");
+            }
 
             _repository.AddressRepository.Update(addressFound);
             _repository.Save();
