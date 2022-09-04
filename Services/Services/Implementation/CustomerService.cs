@@ -4,6 +4,7 @@ using Services.DTO;
 using Services.Exceptions.Customer;
 using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
+using Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,13 @@ namespace Services.Services.Implementation
             };
 
             customerCreate.Generate();
+
+            var customerValidator = new CustomerValidator();
+
+            if (!customerValidator.Validate(customerCreate).IsValid)
+            {
+                throw new ValidationFailed(customerValidator.Validate(customerCreate).Errors, "Customer");
+            }
 
             var customerAccount = new CustomerAccount()
             {
@@ -169,6 +177,13 @@ namespace Services.Services.Implementation
             customerUpdate.PhoneType = customer.PhoneType;
             customerUpdate.Ranking = customer.Ranking;
             customerUpdate.DateModification = DateTime.Now;
+
+            var customerValidator = new CustomerValidator();
+
+            if (!customerValidator.Validate(customerUpdate).IsValid)
+            {
+                throw new ValidationFailed(customerValidator.Validate(customerUpdate).Errors, "Customer");
+            }
 
             _repository.CustomerRepository.Update(customerUpdate);
             _repository.Save();
