@@ -3,6 +3,7 @@ using Persistence.Repositories.Interfaces;
 using Services.DTO;
 using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
+using Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,13 @@ namespace Services.Services.Implementation
             };
 
             newCardFlag.Generate();
+
+            var cardFlagValidator = new CardFlagValidator();
+
+            if (!cardFlagValidator.Validate(newCardFlag).IsValid)
+            {
+                throw new ValidationFailed(cardFlagValidator.Validate(newCardFlag).Errors, "Card Flags");
+            }
 
             _repository.CardFlagRepository.Create(newCardFlag);
             _repository.Save();
@@ -90,6 +98,13 @@ namespace Services.Services.Implementation
 
             cardFlagFound.Name = cardFlag.Name;
             cardFlagFound.DateModification = DateTime.Now;
+
+            var cardFlagValidator = new CardFlagValidator();
+
+            if (!cardFlagValidator.Validate(cardFlagFound).IsValid)
+            {
+                throw new ValidationFailed(cardFlagValidator.Validate(cardFlagFound).Errors, "Card Flags");
+            }
 
             _repository.CardFlagRepository.Update(cardFlagFound);
             _repository.Save();

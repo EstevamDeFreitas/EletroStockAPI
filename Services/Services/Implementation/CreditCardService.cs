@@ -3,6 +3,7 @@ using Persistence.Repositories.Interfaces;
 using Services.DTO;
 using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
+using Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,14 @@ namespace Services.Services.Implementation
             };
 
             newCreditCard.Generate();
+
+            var creditCardValidator = new CreditCardValidator();
+
+
+            if(!creditCardValidator.Validate(newCreditCard).IsValid)
+            {
+                throw new ValidationFailed(creditCardValidator.Validate(newCreditCard).Errors, "Credit Cards");
+            }
 
             _repository.CreditCardRepository.Create(newCreditCard);
             _repository.Save();
@@ -113,6 +122,14 @@ namespace Services.Services.Implementation
             creditCardFound.CardFlagId = creditCard.CardFlagId;
             creditCardFound.OwnerName = creditCard.OwnerName;
             creditCardFound.SecurityCode = creditCard.SecurityCode;
+
+            var creditCardValidator = new CreditCardValidator();
+
+
+            if (!creditCardValidator.Validate(creditCardFound).IsValid)
+            {
+                throw new ValidationFailed(creditCardValidator.Validate(creditCardFound).Errors, "Credit Cards");
+            }
 
             _repository.CreditCardRepository.Update(creditCardFound);
             _repository.Save();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.DTO;
+using Services.Exceptions.Shared;
 using Services.Services.Interfaces;
 using Services.Utilities;
 
@@ -47,6 +48,14 @@ namespace EletroStockAPI.Controllers
                     Message = "Card Flags Created"
                 });
             }
+            catch (ValidationFailed validation)
+            {
+                return BadRequest(new Response<List<FieldError>>
+                {
+                    Data = validation.Errors,
+                    Message = validation.Message
+                });
+            }
             catch (Exception ex)
             {
                 return BadRequest(new Response<object> { Message = ex.Message });
@@ -83,6 +92,14 @@ namespace EletroStockAPI.Controllers
                 return Ok(new Response<object>
                 {
                     Message = "Card Flag Updated"
+                });
+            }
+            catch (ValidationFailed validation)
+            {
+                return BadRequest(new Response<List<FieldError>>
+                {
+                    Data = validation.Errors,
+                    Message = validation.Message
                 });
             }
             catch (Exception ex)

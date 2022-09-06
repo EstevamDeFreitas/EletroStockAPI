@@ -20,7 +20,7 @@ namespace Domain.Entities
         [MaxLength(255)]
         public string OwnerName { get; set; }
         [Required]
-        [Column("name")]
+        [Column("security_code")]
         [StringLength(3)]
         public string SecurityCode { get; set; }
         [Required]
