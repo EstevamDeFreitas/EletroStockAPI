@@ -108,6 +108,7 @@ namespace EletroStockAPI.Controllers
             }
         }
 
+        [Route("{cardFlagId}")]
         [HttpDelete]
         public IActionResult DeleteCardFlag(Guid cardFlagId)
         {
