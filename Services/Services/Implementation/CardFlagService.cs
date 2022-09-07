@@ -54,8 +54,19 @@ namespace Services.Services.Implementation
                 throw new NotFound("Card Flag");
             }
 
-            _repository.CardFlagRepository.Delete(cardFlag);
-            _repository.Save();
+            var cardsUsing = _repository.CreditCardRepository.FindByCondition(x => x.CardFlagId == cardFlagId).ToList();
+
+            if(cardsUsing.Count() > 0)
+            {
+
+            }
+            else
+            {
+                _repository.CardFlagRepository.Delete(cardFlag);
+                _repository.Save();
+            }
+
+            
         }
 
         public CardFlagDTO GetCardFlag(Guid cardFlagId)

@@ -101,8 +101,7 @@ namespace Services.Services.Implementation
                 CardFlagId = x.CardFlagId,
                 CardNumber = x.CardNumber,
                 OwnerName = x.OwnerName,
-                SecurityCode = x.SecurityCode,
-                CardFlag = _repository.CardFlagRepository.FindByCondition(y => y.Id == x.CardFlagId).First().Name
+                SecurityCode = x.SecurityCode
             }).ToList();
 
 
