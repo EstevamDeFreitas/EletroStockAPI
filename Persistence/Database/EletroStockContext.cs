@@ -16,6 +16,13 @@ namespace Persistence.Database
         public DbSet<CardFlag> CardFlags { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<CustomerAccount> CustomerAccounts { get; set; }
+        public DbSet<InactiveCategory> InactiveCategories { get; set; }
+        public DbSet<InactiveReason> InactiveReasons { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<PriceGroup> PriceGroups { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
         public EletroStockContext(DbContextOptions<EletroStockContext> options) : base(options)
         {
 
