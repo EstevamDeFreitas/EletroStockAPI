@@ -13,6 +13,14 @@ namespace Persistence.Repositories.Interfaces
         ICreditCardRepository CreditCardRepository { get; }
         ICardFlagRepository CardFlagRepository { get; }
         ICustomerAccountRepository CustomerAccountRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
+        IInactiveCategoryRepository InactiveCategoryRepository { get; }
+        IInactiveReasonRepository InactiveReasonRepository { get; }
+        IPriceGroupRepository PriceGroupRepository { get; }
+        IProductCategoryRepository ProductCategoryRepository { get; }
+        IProductImageRepository ProductImageRepository { get; }
+        IProductRepository ProductRepository { get; }
+
         void Save();
     }
 }
