@@ -9,10 +9,10 @@
   <ItemGroup>
     <Folder Include="Exceptions\Address\" />
     <Folder Include="Notations\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="FluentValidation" Version="11.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />

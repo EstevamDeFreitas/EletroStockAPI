@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Persistence.Database;
@@ -6,6 +7,7 @@ using Persistence.Repositories.Interfaces;
 using Services.Middleware;
 using Services.Services.Implementation;
 using Services.Services.Interfaces;
+using Services.Utilities;
 using System.Reflection;
 
 namespace EletroStockAPI
@@ -75,6 +77,12 @@ namespace EletroStockAPI
                                     }
                                         );
             });
+
+            var mapperConfig = new AutoMapper.MapperConfiguration(new MapperConfig());
+
+            IMapper mapper = mapperConfig.CreateMapper();
+
+            builder.Services.AddSingleton(mapper);
 
             var app = builder.Build();
 

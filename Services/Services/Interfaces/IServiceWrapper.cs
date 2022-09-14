@@ -12,5 +12,6 @@ namespace Services.Services.Interfaces
         IAddressService AddressService { get; }
         ICardFlagService CardFlagService { get; }
         ICreditCardService CardCreditCardService { get; }
+        IInactiveCategoryService InactiveCategoryService { get; }
     }
 }

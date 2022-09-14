@@ -1,4 +1,5 @@
-﻿using Persistence.Repositories.Interfaces;
+﻿using AutoMapper;
+using Persistence.Repositories.Interfaces;
 using Services.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,14 @@ namespace Services.Services.Implementation
         private readonly Lazy<IAddressService> _addressService;
         private readonly Lazy<ICardFlagService> _cardFlagService;
         private readonly Lazy<ICreditCardService> _creditCardService;
-        public ServiceWrapper(IRepositoryWrapper repository)
+        private readonly Lazy<IInactiveCategoryService> _inactiveCategoryService;
+        public ServiceWrapper(IRepositoryWrapper repository, IMapper mapper)
         {
             _customerService = new Lazy<ICustomerService>(() => new CustomerService(repository));
             _addressService = new Lazy<IAddressService>(() => new AddressService(repository));
             _cardFlagService = new Lazy<ICardFlagService>(() => new CardFlagService(repository));
             _creditCardService = new Lazy<ICreditCardService>(() => new CreditCardService(repository));
+            _inactiveCategoryService = new Lazy<IInactiveCategoryService>(() => new InactiveCategoryService(repository, mapper));
         }
         public ICustomerService CustomerService => _customerService.Value;
 
@@ -28,5 +31,7 @@ namespace Services.Services.Implementation
         public ICardFlagService CardFlagService => _cardFlagService.Value;
 
         public ICreditCardService CardCreditCardService => _creditCardService.Value;
+
+        public IInactiveCategoryService InactiveCategoryService => _inactiveCategoryService.Value;
     }
 }
