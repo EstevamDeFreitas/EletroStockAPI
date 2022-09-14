@@ -29,7 +29,7 @@ namespace Domain.Entities
         public Guid PriceGroupId { get; set; }
         [Required]
         [Column("inactive_reason_id")]
-        public Guid InactiveReasonId { get; set; }
+        public Guid? InactiveReasonId { get; set; }
 
         public PriceGroup PriceGroup { get; set; }
         public InactiveReason InactiveReason { get; set; }

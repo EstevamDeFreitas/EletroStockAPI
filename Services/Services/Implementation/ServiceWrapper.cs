@@ -16,6 +16,7 @@ namespace Services.Services.Implementation
         private readonly Lazy<ICardFlagService> _cardFlagService;
         private readonly Lazy<ICreditCardService> _creditCardService;
         private readonly Lazy<IInactiveCategoryService> _inactiveCategoryService;
+        private readonly Lazy<IInactiveReasonService> _inactiveReasonService;
         public ServiceWrapper(IRepositoryWrapper repository, IMapper mapper)
         {
             _customerService = new Lazy<ICustomerService>(() => new CustomerService(repository));
@@ -23,6 +24,7 @@ namespace Services.Services.Implementation
             _cardFlagService = new Lazy<ICardFlagService>(() => new CardFlagService(repository));
             _creditCardService = new Lazy<ICreditCardService>(() => new CreditCardService(repository));
             _inactiveCategoryService = new Lazy<IInactiveCategoryService>(() => new InactiveCategoryService(repository, mapper));
+            _inactiveReasonService = new Lazy<IInactiveReasonService>(() => new InactiveReasonService(repository, mapper));
         }
         public ICustomerService CustomerService => _customerService.Value;
 
@@ -33,5 +35,7 @@ namespace Services.Services.Implementation
         public ICreditCardService CardCreditCardService => _creditCardService.Value;
 
         public IInactiveCategoryService InactiveCategoryService => _inactiveCategoryService.Value;
+
+        public IInactiveReasonService InactiveReasonService => _inactiveReasonService.Value;
     }
 }

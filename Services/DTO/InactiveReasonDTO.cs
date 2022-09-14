@@ -8,7 +8,7 @@ namespace Services.DTO
 {
     public class InactiveReasonDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public Guid InactiveCategoryId { get; set; }
         public string Description { get; set; }
     }
