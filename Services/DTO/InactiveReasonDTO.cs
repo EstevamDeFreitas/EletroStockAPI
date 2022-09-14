@@ -11,7 +11,5 @@ namespace Services.DTO
         public Guid Id { get; set; }
         public Guid InactiveCategoryId { get; set; }
         public string Description { get; set; }
-
-        public InactiveCategoryDTO InactiveCategory { get; set; }
     }
 }
