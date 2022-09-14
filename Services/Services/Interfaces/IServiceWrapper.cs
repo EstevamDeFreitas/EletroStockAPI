@@ -14,5 +14,6 @@ namespace Services.Services.Interfaces
         ICreditCardService CardCreditCardService { get; }
         IInactiveCategoryService InactiveCategoryService { get; }
         IInactiveReasonService InactiveReasonService { get; }
+        ICategoryService CategoryService { get; }
     }
 }

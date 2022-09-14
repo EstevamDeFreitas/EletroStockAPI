@@ -8,27 +8,46 @@ namespace EletroStockAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InactiveReasonController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly IServiceWrapper _serviceWrapper;
 
-        public InactiveReasonController(IServiceWrapper serviceWrapper)
+        public CategoryController(IServiceWrapper serviceWrapper)
         {
             _serviceWrapper = serviceWrapper;
         }
 
-        [Route("{id}")]
         [HttpGet]
-        public IActionResult GetInactiveReason(Guid id)
+        public IActionResult GetCategories()
         {
             try
             {
-                var inactiveReason = _serviceWrapper.InactiveReasonService.GetInactiveReason(id);
+                var categories = _serviceWrapper.CategoryService.GetCategories();
 
-                return Ok(new Response<InactiveReasonDTO>
+                return Ok(new Response<List<CategoryDTO>>
                 {
-                    Message = "Inactive Reason Found",
-                    Data = inactiveReason
+                    Message = "Categories Found",
+                    Data = categories
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetCategory(Guid id)
+        {
+            try
+            {
+                var category = _serviceWrapper.CategoryService.GetCategory(id);
+
+                return Ok(new Response<CategoryDTO>
+                {
+                    Message = "Category Found",
+                    Data = category
                 });
             }
             catch (Exception ex)
@@ -38,15 +57,15 @@ namespace EletroStockAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateInactiveReason([FromBody] InactiveReasonDTO inactiveReason)
+        public IActionResult CreateCategory([FromBody]CategoryDTO category)
         {
             try
             {
-                 _serviceWrapper.InactiveReasonService.CreateInactiveReason(inactiveReason);
+                _serviceWrapper.CategoryService.CreateCategory(category);
 
                 return Ok(new Response<object>
                 {
-                    Message = "Inactive Reason Created"
+                    Message = "Category Created"
                 });
             }
             catch (Exception ex)
@@ -56,15 +75,15 @@ namespace EletroStockAPI.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateInactiveReason([FromBody] InactiveReasonDTO inactiveReason)
+        public IActionResult UpdateCategory([FromBody] CategoryDTO category)
         {
             try
             {
-                _serviceWrapper.InactiveReasonService.UpdateInactiveReason(inactiveReason);
+                _serviceWrapper.CategoryService.UpdateCategory(category);
 
                 return Ok(new Response<object>
                 {
-                    Message = "Inactive Reason Updated"
+                    Message = "Category Updated"
                 });
             }
             catch (Exception ex)
@@ -75,15 +94,15 @@ namespace EletroStockAPI.Controllers
 
         [Route("{id}")]
         [HttpDelete]
-        public IActionResult DeleteInactiveReason(Guid id)
+        public IActionResult DeleteCategory(Guid id)
         {
             try
             {
-                _serviceWrapper.InactiveReasonService.DeleteInactiveReason(id);
+                _serviceWrapper.CategoryService.DeleteCategory(id);
 
-                return Ok(new Response<object>
+                return Ok(new Response<CategoryDTO>
                 {
-                    Message = "Inactive Reason Updated"
+                    Message = "Category Deleted"
                 });
             }
             catch (Exception ex)
