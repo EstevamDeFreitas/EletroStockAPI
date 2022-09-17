@@ -9,5 +9,7 @@ namespace Persistence.Repositories.Interfaces
 {
     public interface IProductRepository : IRepositoryBase<Product>
     {
+        List<Product> GetProductsFullInfo();
+        Product? GetProductFullInfo(Guid id);
     }
 }

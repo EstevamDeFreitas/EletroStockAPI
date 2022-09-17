@@ -19,6 +19,7 @@ namespace Services.Services.Implementation
         private readonly Lazy<IInactiveReasonService> _inactiveReasonService;
         private readonly Lazy<ICategoryService> _categoryService;
         private readonly Lazy<IPriceGroupService> _priceGroupService;
+        private readonly Lazy<IProductService> _productService;
         public ServiceWrapper(IRepositoryWrapper repository, IMapper mapper)
         {
             _customerService = new Lazy<ICustomerService>(() => new CustomerService(repository));
@@ -29,6 +30,7 @@ namespace Services.Services.Implementation
             _inactiveReasonService = new Lazy<IInactiveReasonService>(() => new InactiveReasonService(repository, mapper));
             _categoryService = new Lazy<ICategoryService>(() => new CategoryService(repository, mapper));
             _priceGroupService = new Lazy<IPriceGroupService>(() => new PriceGroupService(repository, mapper));
+            _productService = new Lazy<IProductService>(() => new ProductService(repository, mapper));
         }
         public ICustomerService CustomerService => _customerService.Value;
 
@@ -45,5 +47,6 @@ namespace Services.Services.Implementation
         public ICategoryService CategoryService => _categoryService.Value;
 
         public IPriceGroupService PriceGroupService => _priceGroupService.Value;
+        public IProductService ProductService => _productService.Value;
     }
 }

@@ -27,12 +27,11 @@ namespace Domain.Entities
         [Required]
         [Column("price_group_id")]
         public Guid PriceGroupId { get; set; }
-        [Required]
         [Column("inactive_reason_id")]
         public Guid? InactiveReasonId { get; set; }
 
         public PriceGroup PriceGroup { get; set; }
-        public InactiveReason InactiveReason { get; set; }
+        public InactiveReason? InactiveReason { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductImage> ProductImages { get; set; }
     }

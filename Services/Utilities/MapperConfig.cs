@@ -17,6 +17,9 @@ namespace Services.Utilities
             CreateMap<InactiveReasonDTO, InactiveReason>().ReverseMap();
             CreateMap<CategoryDTO, Category>().ReverseMap();
             CreateMap<PriceGroupDTO, PriceGroup>().ReverseMap();
+            CreateMap<ProductDTO, Product>().ReverseMap();
+            CreateMap<ProductCategoryDTO, ProductCategory>().ReverseMap();
+            CreateMap<ProductImageDTO, ProductImage>().ReverseMap();
         }
     }
 }

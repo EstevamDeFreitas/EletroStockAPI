@@ -16,5 +16,6 @@ namespace Services.Services.Interfaces
         IInactiveReasonService InactiveReasonService { get; }
         ICategoryService CategoryService { get; }
         IPriceGroupService PriceGroupService { get; }
+        IProductService ProductService { get; }
     }
 }
