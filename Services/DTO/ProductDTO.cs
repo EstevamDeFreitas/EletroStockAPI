@@ -14,6 +14,7 @@ namespace Services.DTO
         public string Description { get; set; }
         public Guid PriceGroupId { get; set; }
         public Guid? InactiveReasonId { get; set; }
+        public decimal Price { get; set; } //Implementar durante o stock
         public InactiveReasonDTO? InactiveReason { get; set; }
         public List<ProductCategoryDTO> ProductCategories { get; set; }
         public List<ProductImageDTO> ProductImages { get; set; }
