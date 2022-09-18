@@ -69,7 +69,6 @@ namespace Services.Services.Implementation
                 throw new NotFound("Category");
             }
 
-            categoryFound.Description = category.Description;
             categoryFound.Name = category.Name;
 
             _repository.CategoryRepository.Update(categoryFound);

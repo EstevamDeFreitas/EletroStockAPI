@@ -15,10 +15,6 @@ namespace Domain.Entities
         [Column("name")]
         [MaxLength(50)]
         public string Name { get; set; }
-        [Required]
-        [Column("description")]
-        [MaxLength(255)]
-        public string Description { get; set; }
 
         public List<ProductCategory> ProductCategories { get; set; }
     }
