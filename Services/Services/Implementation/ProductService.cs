@@ -38,7 +38,7 @@ namespace Services.Services.Implementation
 
         public void DeleteProduct(Guid id)
         {
-            var productFound = _repository.ProductRepository.FindByCondition(x => x.Id == id).FirstOrDefault();
+            var productFound = _repository.ProductRepository.GetProductFullInfo(id);
 
             if(productFound is null)
             {
@@ -51,7 +51,7 @@ namespace Services.Services.Implementation
 
         public void DisableProduct(Guid id, InactiveReasonDTO inactiveReason)
         {
-            var product = _repository.ProductRepository.FindByCondition(x => x.Id == id).FirstOrDefault();
+            var product = _repository.ProductRepository.GetProductFullInfo(id);
 
             if (product is null)
             {
