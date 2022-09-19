@@ -23,6 +23,7 @@ namespace Persistence.Repositories.Implementation
         private readonly Lazy<IProductCategoryRepository> _productCategoryRepository;
         private readonly Lazy<IProductImageRepository> _productImageRepository;
         private readonly Lazy<IProductRepository> _productRepository;
+        private readonly Lazy<IStockRepository> _stockRepository;
         public RepositoryWrapper(EletroStockContext dbContext)
         {
             _dbContext = dbContext;
@@ -38,6 +39,7 @@ namespace Persistence.Repositories.Implementation
             _productImageRepository = new Lazy<IProductImageRepository>(() => new ProductImageRepository(dbContext));
             _productCategoryRepository = new Lazy<IProductCategoryRepository>(() => new ProductCategoryRepository(dbContext));
             _productRepository = new Lazy<IProductRepository>(() => new ProductRepository(dbContext));
+            _stockRepository = new Lazy<IStockRepository>(() => new StockRepository(dbContext));
         }
 
         public ICustomerRepository CustomerRepository => _customerRepository.Value;
@@ -63,6 +65,7 @@ namespace Persistence.Repositories.Implementation
         public IProductImageRepository ProductImageRepository => _productImageRepository.Value;
 
         public IProductRepository ProductRepository => _productRepository.Value;
+        public IStockRepository StockRepository => _stockRepository.Value;
 
         public void Save()
         {

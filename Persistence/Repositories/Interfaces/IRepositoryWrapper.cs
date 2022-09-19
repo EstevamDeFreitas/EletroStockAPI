@@ -20,7 +20,7 @@ namespace Persistence.Repositories.Interfaces
         IProductCategoryRepository ProductCategoryRepository { get; }
         IProductImageRepository ProductImageRepository { get; }
         IProductRepository ProductRepository { get; }
-
+        IStockRepository StockRepository { get; }
         void Save();
     }
 }
