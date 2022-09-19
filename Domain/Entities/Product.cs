@@ -34,5 +34,6 @@ namespace Domain.Entities
         public InactiveReason? InactiveReason { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductImage> ProductImages { get; set; }
+        public List<Stock> Stocks { get; set; }
     }
 }
