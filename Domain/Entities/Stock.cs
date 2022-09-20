@@ -23,6 +23,9 @@ namespace Domain.Entities
         [Required]
         [Column("value")]
         public decimal Value { get; set; }
+        [Required]
+        [Column("dt_input")]
+        public DateTime InputDate { get; set; }
         public Product Product { get; set; }
     }
 }

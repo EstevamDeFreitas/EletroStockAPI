@@ -13,5 +13,6 @@ namespace Services.DTO
         public string SourceName { get; set; }
         public int Quantity { get; set; }
         public decimal Value { get; set; }
+        public DateTime InputDate { get; set; }
     }
 }
