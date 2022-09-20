@@ -24,6 +24,7 @@ namespace Persistence.Repositories.Implementation
                                             .ThenInclude(x => x.Category)
                                         .Include(x => x.InactiveReason)
                                             .ThenInclude(x => x.InactiveCategory)
+                                        .Include(x => x.Stocks)
                                         .FirstOrDefault(x => x.Id == id);
         }
 
@@ -35,6 +36,7 @@ namespace Persistence.Repositories.Implementation
                                             .ThenInclude(x => x.Category)
                                         .Include(x => x.InactiveReason)
                                             .ThenInclude(x => x.InactiveCategory)
+                                        .Include(x => x.Stocks)
                                         .ToList();
         }
     }

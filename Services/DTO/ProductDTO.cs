@@ -14,10 +14,21 @@ namespace Services.DTO
         public string Description { get; set; }
         public Guid PriceGroupId { get; set; }
         public Guid? InactiveReasonId { get; set; }
-        public decimal Price { get; set; } //Implementar durante o stock
+        public decimal Price
+        {
+            get
+            {
+                if (Stocks.Count() == 0)
+                {
+                    return 0;
+                }
+                return Stocks.Sum(x => x.Quantity);
+            }
+        }
         public InactiveReasonDTO? InactiveReason { get; set; }
         public List<ProductCategoryDTO> ProductCategories { get; set; }
         public List<ProductImageDTO> ProductImages { get; set; }
+        public List<StockDTO> Stocks { get; set; }
     }
 
     public class ProductCategoryDTO
@@ -44,7 +55,7 @@ namespace Services.DTO
         {
             get 
             { 
-                if(Stocks.Count() == null)
+                if(Stocks.Count() == 0)
                 {
                     return 0;
                 }
@@ -55,7 +66,7 @@ namespace Services.DTO
         {
             get 
             {
-                if (Stocks.Count() == null)
+                if (Stocks.Count() == 0)
                 {
                     return 0;
                 }
