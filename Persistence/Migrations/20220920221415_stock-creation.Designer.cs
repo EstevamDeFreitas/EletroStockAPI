@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Database;
@@ -11,9 +12,10 @@ using Persistence.Database;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(EletroStockContext))]
-    partial class EletroStockContextModelSnapshot : ModelSnapshot
+    [Migration("20220920221415_stock-creation")]
+    partial class stockcreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,7 +105,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("etk_addresses", (string)null);
+                    b.ToTable("etk_addresses");
                 });
 
             modelBuilder.Entity("Domain.Entities.CardFlag", b =>
@@ -129,7 +131,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("etk_card_flags", (string)null);
+                    b.ToTable("etk_card_flags");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -155,7 +157,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("etk_categories", (string)null);
+                    b.ToTable("etk_categories");
                 });
 
             modelBuilder.Entity("Domain.Entities.CreditCard", b =>
@@ -205,7 +207,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("etk_credit_cards", (string)null);
+                    b.ToTable("etk_credit_cards");
                 });
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>
@@ -278,7 +280,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("etk_customers", (string)null);
+                    b.ToTable("etk_customers");
                 });
 
             modelBuilder.Entity("Domain.Entities.CustomerAccount", b =>
@@ -324,7 +326,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("DefaultDeliveryAddressId");
 
-                    b.ToTable("etk_customer_accounts", (string)null);
+                    b.ToTable("etk_customer_accounts");
                 });
 
             modelBuilder.Entity("Domain.Entities.InactiveCategory", b =>
@@ -360,7 +362,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("etk_inactive_categories", (string)null);
+                    b.ToTable("etk_inactive_categories");
                 });
 
             modelBuilder.Entity("Domain.Entities.InactiveReason", b =>
@@ -392,7 +394,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("InactiveCategoryId");
 
-                    b.ToTable("etk_inactive_reasons", (string)null);
+                    b.ToTable("etk_inactive_reasons");
                 });
 
             modelBuilder.Entity("Domain.Entities.PriceGroup", b =>
@@ -428,7 +430,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("etk_price_groups", (string)null);
+                    b.ToTable("etk_price_groups");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -478,7 +480,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("PriceGroupId");
 
-                    b.ToTable("etk_products", (string)null);
+                    b.ToTable("etk_products");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductCategory", b =>
@@ -495,7 +497,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("etk_product_categories", (string)null);
+                    b.ToTable("etk_product_categories");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductImage", b =>
@@ -526,7 +528,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("etk_product_images", (string)null);
+                    b.ToTable("etk_product_images");
                 });
 
             modelBuilder.Entity("Domain.Entities.Stock", b =>
@@ -565,7 +567,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("etk_stocks", (string)null);
+                    b.ToTable("etk_stocks");
                 });
 
             modelBuilder.Entity("Domain.Entities.Address", b =>

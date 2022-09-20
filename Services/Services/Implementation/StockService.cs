@@ -42,6 +42,11 @@ namespace Services.Services.Implementation
             return _mapper.Map<StockDTO>(_repository.StockRepository.FindByCondition(x => x.Id == id).FirstOrDefault());
         }
 
+        public List<ProductStockDTO> GetStockByProduct()
+        {
+            return _mapper.Map<List<ProductStockDTO>>(_repository.StockRepository.GetProductsStocks());
+        }
+
         public List<StockDTO> GetStocks()
         {
             return _mapper.Map<List<StockDTO>>(_repository.StockRepository.GetAll().ToList());
@@ -53,6 +58,7 @@ namespace Services.Services.Implementation
 
             stockFound.SourceName = stock.SourceName;
             stockFound.Value = stock.Value;
+            stockFound.DateModification = DateTime.Now;
 
             _repository.StockRepository.Update(stockFound);
             _repository.Save();

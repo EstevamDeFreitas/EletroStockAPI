@@ -21,6 +21,7 @@ namespace Services.Utilities
             CreateMap<ProductCategoryDTO, ProductCategory>().ReverseMap();
             CreateMap<ProductImageDTO, ProductImage>().ReverseMap();
             CreateMap<StockDTO, Stock>().ReverseMap();
+            CreateMap<ProductStockDTO, Product>().ReverseMap();
         }
     }
 }

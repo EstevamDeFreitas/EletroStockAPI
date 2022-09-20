@@ -33,4 +33,46 @@ namespace Services.DTO
         public Guid ProductId { get; set; }
         public string ImageUrl { get; set; }
     }
+
+    public class ProductStockDTO
+    {
+        public Guid Id { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public List<StockDTO> Stocks { get; set; }
+        public int StockQuantity
+        {
+            get 
+            { 
+                if(Stocks.Count() == null)
+                {
+                    return 0;
+                }
+                return Stocks.Sum(x => x.Quantity); 
+            }
+        }
+        public decimal TotalValue
+        {
+            get 
+            {
+                if (Stocks.Count() == null)
+                {
+                    return 0;
+                }
+                return Stocks.Sum(x => x.Value); 
+            }
+        }
+        public decimal UnitValue
+        {
+            get
+            {
+                if (Stocks.Count() == 0)
+                {
+                    return 0;
+                }
+
+                return Stocks.Max(x => x.Value);
+            }
+        }
+    }
 }

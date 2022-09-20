@@ -11,6 +11,7 @@ namespace Services.Services.Interfaces
     {
         StockDTO GetStock(Guid id);
         List<StockDTO> GetStocks();
+        List<ProductStockDTO> GetStockByProduct();
         void UpdateStock(StockDTO stock);
         void CreateStock(StockDTO stock);
         void DeleteStock(Guid id);

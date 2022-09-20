@@ -17,5 +17,6 @@ namespace Services.Services.Interfaces
         ICategoryService CategoryService { get; }
         IPriceGroupService PriceGroupService { get; }
         IProductService ProductService { get; }
+        IStockService StockService { get; }
     }
 }

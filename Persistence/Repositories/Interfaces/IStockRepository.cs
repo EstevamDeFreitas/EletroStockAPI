@@ -9,5 +9,6 @@ namespace Persistence.Repositories.Interfaces
 {
     public interface IStockRepository : IRepositoryBase<Stock>
     {
+        List<Product> GetProductsStocks();
     }
 }

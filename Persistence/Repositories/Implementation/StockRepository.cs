@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Database;
 using Persistence.Repositories.Interfaces;
 using System;
@@ -13,6 +14,11 @@ namespace Persistence.Repositories.Implementation
     {
         public StockRepository(EletroStockContext dbContext) : base(dbContext)
         {
+        }
+
+        public List<Product> GetProductsStocks()
+        {
+            return DbContext.Products.Include(x => x.Stocks).ToList();
         }
     }
 }
