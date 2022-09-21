@@ -8,24 +8,21 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    [Table("etk_stocks")]
-    public class Stock : EntityBase
+    [Table("etk_shopping_cart_items")]
+    public class ShoppingCartItem
     {
+        [Key]
+        [Required]
+        [Column("shopping_cart_id")]
+        public Guid ShoppingCartId { get; set; }
         [Required]
         [Column("product_id")]
         public Guid ProductId { get; set; }
         [Required]
-        [Column("source_name")]
-        public string SourceName { get; set; }
-        [Required]
         [Column("quantity")]
         public uint Quantity { get; set; }
-        [Required]
-        [Column("value")]
-        public decimal Value { get; set; }
-        [Required]
-        [Column("dt_input")]
-        public DateTime InputDate { get; set; }
+
+        public ShoppingCart ShoppingCart { get; set; }
         public Product Product { get; set; }
     }
 }
