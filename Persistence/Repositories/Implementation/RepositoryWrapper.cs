@@ -24,6 +24,8 @@ namespace Persistence.Repositories.Implementation
         private readonly Lazy<IProductImageRepository> _productImageRepository;
         private readonly Lazy<IProductRepository> _productRepository;
         private readonly Lazy<IStockRepository> _stockRepository;
+        private readonly Lazy<IShoppingCartRepository> _shoppingCartRepository;
+        private readonly Lazy<IShoppingCartItemRepository> _shoppingCartItemRepository;
         public RepositoryWrapper(EletroStockContext dbContext)
         {
             _dbContext = dbContext;
@@ -40,6 +42,8 @@ namespace Persistence.Repositories.Implementation
             _productCategoryRepository = new Lazy<IProductCategoryRepository>(() => new ProductCategoryRepository(dbContext));
             _productRepository = new Lazy<IProductRepository>(() => new ProductRepository(dbContext));
             _stockRepository = new Lazy<IStockRepository>(() => new StockRepository(dbContext));
+            _shoppingCartItemRepository = new Lazy<IShoppingCartItemRepository>(() => new ShoppingCartItemRepository(dbContext));
+            _shoppingCartRepository = new Lazy<IShoppingCartRepository>(() => new ShoppingCartRepository(dbContext));
         }
 
         public ICustomerRepository CustomerRepository => _customerRepository.Value;
@@ -66,6 +70,10 @@ namespace Persistence.Repositories.Implementation
 
         public IProductRepository ProductRepository => _productRepository.Value;
         public IStockRepository StockRepository => _stockRepository.Value;
+
+        public IShoppingCartItemRepository ShoppingCartItemRepository => _shoppingCartItemRepository.Value;
+
+        public IShoppingCartRepository ShoppingCartRepository => _shoppingCartRepository.Value;
 
         public void Save()
         {
