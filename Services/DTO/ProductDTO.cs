@@ -22,9 +22,10 @@ namespace Services.DTO
                 {
                     return 0;
                 }
-                return Stocks.Max(x => x.Value);
+                return Stocks.Max(x => x.Value) + (Stocks.Max(x => x.Value) * (PriceGroup.ProfitMargin / 100));
             }
         }
+        public PriceGroupDTO? PriceGroup { get; set; }
         public InactiveReasonDTO? InactiveReason { get; set; }
         public List<ProductCategoryDTO> ProductCategories { get; set; }
         public List<ProductImageDTO> ProductImages { get; set; }

@@ -24,7 +24,12 @@ namespace Services.Services.Implementation
 
         public void AddItem(ShoppingCartAddDTO item, Guid customerId)
         {
-            var product = _repository.ProductRepository.GetProductFullInfo(customerId);
+            if (item.Quantity == 0)
+            {
+                throw new QuantityMustBeDifferentFromZero();
+            }
+
+            var product = _repository.ProductRepository.GetProductFullInfo(item.ProductId);
 
             if(product is null)
             {
@@ -99,6 +104,11 @@ namespace Services.Services.Implementation
         public void UpdateItem(ShoppingCartItemDTO item)
         {
             var cartItem = _repository.ShoppingCartItemRepository.FindByCondition(x => x.ShoppingCartId == item.ShoppingCartId && x.ProductId == item.ProductId).FirstOrDefault();
+
+            if(item.Quantity == 0)
+            {
+                throw new QuantityMustBeDifferentFromZero();
+            }
 
             cartItem.Quantity = item.Quantity;
 
