@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Database;
 using Persistence.Repositories.Interfaces;
 using System;
@@ -13,6 +14,11 @@ namespace Persistence.Repositories.Implementation
     {
         public ShoppingCartRepository(EletroStockContext dbContext) : base(dbContext)
         {
+        }
+
+        public ShoppingCart? GetCustomerShoppingCart(Guid customerId)
+        {
+            return DbContext.ShoppingCarts.Include(x => x.ShoppingCartItems).ThenInclude(x => x.Product).Where(x => x.CustomerId == customerId && x.CartValidity <= DateTime.Now).FirstOrDefault();
         }
     }
 }
