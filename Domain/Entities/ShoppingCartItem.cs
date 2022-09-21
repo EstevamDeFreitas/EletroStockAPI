@@ -11,7 +11,6 @@ namespace Domain.Entities
     [Table("etk_shopping_cart_items")]
     public class ShoppingCartItem
     {
-        [Key]
         [Required]
         [Column("shopping_cart_id")]
         public Guid ShoppingCartId { get; set; }

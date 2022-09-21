@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Database;
@@ -11,9 +12,10 @@ using Persistence.Database;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(EletroStockContext))]
-    partial class EletroStockContextModelSnapshot : ModelSnapshot
+    [Migration("20220921204424_shopping-cart")]
+    partial class shoppingcart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -561,21 +563,27 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.ShoppingCartItem", b =>
                 {
+                    b.Property<Guid>("ShoppingCartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("shopping_cart_id");
+
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
-
-                    b.Property<Guid>("ShoppingCartId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("shopping_cart_id");
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint")
                         .HasColumnName("quantity");
 
-                    b.HasKey("ProductId", "ShoppingCartId");
+                    b.Property<Guid>("ShoppingCartId1")
+                        .HasColumnType("uuid");
 
-                    b.HasIndex("ShoppingCartId");
+                    b.HasKey("ShoppingCartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ShoppingCartId1");
 
                     b.ToTable("etk_shopping_cart_items");
                 });
@@ -761,7 +769,7 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Entities.ShoppingCart", "ShoppingCart")
                         .WithMany("ShoppingCartItems")
-                        .HasForeignKey("ShoppingCartId")
+                        .HasForeignKey("ShoppingCartId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -21,6 +21,7 @@ namespace Services.Services.Implementation
         private readonly Lazy<IPriceGroupService> _priceGroupService;
         private readonly Lazy<IProductService> _productService;
         private readonly Lazy<IStockService> _stockService;
+        private readonly Lazy<IShoppingCartService> _shoppingCartService;
         public ServiceWrapper(IRepositoryWrapper repository, IMapper mapper)
         {
             _customerService = new Lazy<ICustomerService>(() => new CustomerService(repository));
@@ -33,6 +34,7 @@ namespace Services.Services.Implementation
             _priceGroupService = new Lazy<IPriceGroupService>(() => new PriceGroupService(repository, mapper));
             _productService = new Lazy<IProductService>(() => new ProductService(repository, mapper));
             _stockService = new Lazy<IStockService>(() => new StockService(repository, mapper));
+            _shoppingCartService = new Lazy<IShoppingCartService>(() => new ShoppingCartService(repository, mapper));
         }
         public ICustomerService CustomerService => _customerService.Value;
 
@@ -51,5 +53,7 @@ namespace Services.Services.Implementation
         public IPriceGroupService PriceGroupService => _priceGroupService.Value;
         public IProductService ProductService => _productService.Value;
         public IStockService StockService => _stockService.Value;
+
+        public IShoppingCartService ShoppingCartService => _shoppingCartService.Value;
     }
 }

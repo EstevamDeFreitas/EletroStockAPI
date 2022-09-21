@@ -18,7 +18,10 @@ namespace Persistence.Repositories.Implementation
 
         public ShoppingCart? GetCustomerShoppingCart(Guid customerId)
         {
-            return DbContext.ShoppingCarts.Include(x => x.ShoppingCartItems).ThenInclude(x => x.Product).Where(x => x.CustomerId == customerId && x.CartValidity <= DateTime.Now).FirstOrDefault();
+            return DbContext.ShoppingCarts.Include(x => x.ShoppingCartItems)
+                                                .ThenInclude(x => x.Product)
+                                                    .ThenInclude(x => x.Stocks)
+                                            .Where(x => x.CustomerId == customerId && x.CartValidity >= DateTime.Now).FirstOrDefault();
         }
     }
 }

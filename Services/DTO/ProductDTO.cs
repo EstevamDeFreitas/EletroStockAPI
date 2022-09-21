@@ -22,7 +22,7 @@ namespace Services.DTO
                 {
                     return 0;
                 }
-                return Stocks.Sum(x => x.Quantity);
+                return Stocks.Max(x => x.Value);
             }
         }
         public InactiveReasonDTO? InactiveReason { get; set; }

@@ -11,6 +11,7 @@ namespace Services.DTO
         public Guid ShoppingCartId { get; set; }
         public Guid ProductId { get; set; }
         public uint Quantity { get; set; }
+        public ProductDTO? Product { get; set; }
     }
 
     public class ShoppingCartAddDTO

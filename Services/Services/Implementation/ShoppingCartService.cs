@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Persistence.Repositories.Interfaces;
 using Services.DTO;
+using Services.Exceptions.Shared;
 using Services.Exceptions.ShoppingCart;
 using Services.Services.Interfaces;
 using System;
@@ -23,6 +24,18 @@ namespace Services.Services.Implementation
 
         public void AddItem(ShoppingCartAddDTO item, Guid customerId)
         {
+            var product = _repository.ProductRepository.GetProductFullInfo(customerId);
+
+            if(product is null)
+            {
+                throw new NotFound("Product");
+            }
+
+            if((product.InactiveReason is not null && !product.InactiveReason.InactiveCategory.Active) || (product.Stocks is null || !product.Stocks.Any(x => x.Quantity > 0)) )
+            {
+                throw new ProductIsInactive(product.Name);
+            }
+
             var currentShoppingCart = _repository.ShoppingCartRepository.GetCustomerShoppingCart(customerId);
 
             if(currentShoppingCart is null)
@@ -33,6 +46,7 @@ namespace Services.Services.Implementation
 
                 newShoppingCart.Generate();
 
+                newShoppingCart.ShoppingCartItems = new List<ShoppingCartItem>();
                 newShoppingCart.ShoppingCartItems.Add(new ShoppingCartItem { ProductId = item.ProductId, Quantity = item.Quantity, ShoppingCartId = newShoppingCart.Id });
 
                 _repository.ShoppingCartRepository.Create(newShoppingCart);
@@ -64,7 +78,14 @@ namespace Services.Services.Implementation
 
         public ShoppingCartDTO GetShoppingCart(Guid customerId)
         {
-            return _mapper.Map<ShoppingCartDTO>(_repository.ShoppingCartRepository.GetCustomerShoppingCart(customerId));
+            var shoppingCart = _repository.ShoppingCartRepository.GetCustomerShoppingCart(customerId);
+
+            if(shoppingCart is null)
+            {
+                throw new NotFound("Shopping Cart");
+            }
+
+            return _mapper.Map<ShoppingCartDTO>(shoppingCart);
         }
 
         public void RemoveItem(ShoppingCartItemDTO item)
