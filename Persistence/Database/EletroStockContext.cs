@@ -26,6 +26,8 @@ namespace Persistence.Database
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<CouponCustomer> CouponCustomers { get; set; }
         public EletroStockContext(DbContextOptions<EletroStockContext> options) : base(options)
         {
 
