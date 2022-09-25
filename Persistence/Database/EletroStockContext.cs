@@ -42,6 +42,9 @@ namespace Persistence.Database
             modelBuilder.ApplyConfiguration(new CustomerAccountMapping());
             modelBuilder.ApplyConfiguration(new ProductCategoryMapping());
             modelBuilder.ApplyConfiguration(new ShoppingCartItemMapping());
+            modelBuilder.ApplyConfiguration(new SaleCouponMapping());
+            modelBuilder.ApplyConfiguration(new SaleItemMapping());
+            modelBuilder.ApplyConfiguration(new SalePaymentMapping());
         }
     }
 }
