@@ -26,6 +26,10 @@ namespace Persistence.Repositories.Implementation
         private readonly Lazy<IStockRepository> _stockRepository;
         private readonly Lazy<IShoppingCartRepository> _shoppingCartRepository;
         private readonly Lazy<IShoppingCartItemRepository> _shoppingCartItemRepository;
+        private readonly Lazy<ISaleRepository> _saleRepository;
+        private readonly Lazy<ISalePaymentRepository> _salePaymentRepository;
+        private readonly Lazy<ISaleItemRepository> _saleItemRepository;
+        private readonly Lazy<ISaleCouponRepository> _saleCouponRepository;
         public RepositoryWrapper(EletroStockContext dbContext)
         {
             _dbContext = dbContext;
@@ -44,6 +48,10 @@ namespace Persistence.Repositories.Implementation
             _stockRepository = new Lazy<IStockRepository>(() => new StockRepository(dbContext));
             _shoppingCartItemRepository = new Lazy<IShoppingCartItemRepository>(() => new ShoppingCartItemRepository(dbContext));
             _shoppingCartRepository = new Lazy<IShoppingCartRepository>(() => new ShoppingCartRepository(dbContext));
+            _saleCouponRepository = new Lazy<ISaleCouponRepository>(() => new SaleCouponRepository(dbContext));
+            _saleItemRepository = new Lazy<ISaleItemRepository>(() => new SaleItemRepository(dbContext));
+            _salePaymentRepository = new Lazy<ISalePaymentRepository>(() => new SalePaymentRepository(dbContext));
+            _saleRepository = new Lazy<ISaleRepository>(() => new SaleRepository(dbContext));
         }
 
         public ICustomerRepository CustomerRepository => _customerRepository.Value;
@@ -74,6 +82,14 @@ namespace Persistence.Repositories.Implementation
         public IShoppingCartItemRepository ShoppingCartItemRepository => _shoppingCartItemRepository.Value;
 
         public IShoppingCartRepository ShoppingCartRepository => _shoppingCartRepository.Value;
+
+        public ISaleCouponRepository SaleCouponRepository => _saleCouponRepository.Value;
+
+        public ISaleItemRepository SaleItemRepository => _saleItemRepository.Value;
+
+        public ISalePaymentRepository SalePaymentRepository => _salePaymentRepository.Value;
+
+        public ISaleRepository SaleRepository => _saleRepository.Value; 
 
         public void Save()
         {

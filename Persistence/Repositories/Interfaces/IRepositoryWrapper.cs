@@ -23,6 +23,10 @@ namespace Persistence.Repositories.Interfaces
         IStockRepository StockRepository { get; }
         IShoppingCartItemRepository ShoppingCartItemRepository { get; }
         IShoppingCartRepository ShoppingCartRepository { get; }
+        ISaleCouponRepository SaleCouponRepository { get; }
+        ISaleItemRepository SaleItemRepository { get; }
+        ISalePaymentRepository SalePaymentRepository { get; }
+        ISaleRepository SaleRepository { get; }
         void Save();
     }
 }
