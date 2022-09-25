@@ -13,7 +13,7 @@ namespace Persistence.Mapping
     {
         public void Configure(EntityTypeBuilder<CouponCustomer> builder)
         {
-            builder.HasKey(x => new { x.CouponId, x.CustomerId });
+            
         }
     }
 }

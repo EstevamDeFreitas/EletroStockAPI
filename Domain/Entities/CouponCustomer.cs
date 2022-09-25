@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Domain.Entities
 {
     [Table("etk_customer_coupons")]
-    public class CouponCustomer
+    public class CouponCustomer : EntityBase
     {
         [Required]
         [Column("customer_id")]
