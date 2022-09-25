@@ -35,5 +35,6 @@ namespace Domain.Entities
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductImage> ProductImages { get; set; }
         public List<Stock>? Stocks { get; set; }
+        public List<Sale> Sales { get; set; }
     }
 }

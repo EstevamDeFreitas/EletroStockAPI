@@ -59,5 +59,6 @@ namespace Domain.Entities
         public virtual CustomerAccount DefaultChargeAddressCustomerAccount { get; set; }
         [NotMapped]
         public virtual CustomerAccount DefaultDeliveryAddressCustomerAccount { get; set; }
+        public List<Sale> Sales { get; set; }
     }
 }

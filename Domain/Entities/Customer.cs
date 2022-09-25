@@ -53,5 +53,6 @@ namespace Domain.Entities
         public CustomerAccount CustomerAccount { get; set; }
         public List<Address> Addresses { get; set; }
         public List<CreditCard> CreditCards { get; set; }
+        public List<Sale> Sales { get; set; }
     }
 }

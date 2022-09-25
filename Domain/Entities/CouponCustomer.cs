@@ -23,5 +23,6 @@ namespace Domain.Entities
 
         public Customer Customer { get; set; }
         public Coupon Coupon { get; set; }
+        public List<Sale> Sales { get; set; }
     }
 }
