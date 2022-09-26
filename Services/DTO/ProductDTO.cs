@@ -18,7 +18,7 @@ namespace Services.DTO
         {
             get
             {
-                if (Stocks.Count() == 0)
+                if (Stocks == null || Stocks.Count() == 0)
                 {
                     return 0;
                 }
@@ -29,7 +29,7 @@ namespace Services.DTO
         public InactiveReasonDTO? InactiveReason { get; set; }
         public List<ProductCategoryDTO> ProductCategories { get; set; }
         public List<ProductImageDTO> ProductImages { get; set; }
-        public List<StockDTO> Stocks { get; set; }
+        public List<StockDTO>? Stocks { get; set; }
     }
 
     public class ProductCategoryDTO
