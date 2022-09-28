@@ -30,6 +30,9 @@ namespace Persistence.Repositories.Implementation
         private readonly Lazy<ISalePaymentRepository> _salePaymentRepository;
         private readonly Lazy<ISaleItemRepository> _saleItemRepository;
         private readonly Lazy<ISaleCouponRepository> _saleCouponRepository;
+        private readonly Lazy<ICouponCustomerRepository> _couponCustomerRepository;
+        private readonly Lazy<ICouponRepository> _couponRepository;
+
         public RepositoryWrapper(EletroStockContext dbContext)
         {
             _dbContext = dbContext;
@@ -52,6 +55,8 @@ namespace Persistence.Repositories.Implementation
             _saleItemRepository = new Lazy<ISaleItemRepository>(() => new SaleItemRepository(dbContext));
             _salePaymentRepository = new Lazy<ISalePaymentRepository>(() => new SalePaymentRepository(dbContext));
             _saleRepository = new Lazy<ISaleRepository>(() => new SaleRepository(dbContext));
+            _couponCustomerRepository = new Lazy<ICouponCustomerRepository>(() => new CouponCustomerRepository(dbContext));
+            _couponRepository = new Lazy<ICouponRepository>(() => new CouponRepository(dbContext));
         }
 
         public ICustomerRepository CustomerRepository => _customerRepository.Value;
@@ -89,7 +94,11 @@ namespace Persistence.Repositories.Implementation
 
         public ISalePaymentRepository SalePaymentRepository => _salePaymentRepository.Value;
 
-        public ISaleRepository SaleRepository => _saleRepository.Value; 
+        public ISaleRepository SaleRepository => _saleRepository.Value;
+
+        public ICouponCustomerRepository CouponCustomerRepository => _couponCustomerRepository.Value;
+
+        public ICouponRepository CouponRepository => _couponRepository.Value;
 
         public void Save()
         {

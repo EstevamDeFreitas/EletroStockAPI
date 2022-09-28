@@ -20,4 +20,12 @@ namespace Services.DTO
         public List<SalePaymentDTO> SalePayments { get; set; }
         public List<SaleCouponDTO> SaleCoupons { get; set; }
     }
+
+    public class SaleCreateDTO
+    {
+        public Guid ShoppingCartId { get; set; }
+        public List<Guid> AddressIds { get; set; }
+        public List<Guid> CreditCardIds { get; set; }
+        public List<Guid>? CustomerCouponsIds { get; set; }
+    }
 }

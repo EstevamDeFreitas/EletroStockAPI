@@ -27,6 +27,8 @@ namespace Persistence.Repositories.Interfaces
         ISaleItemRepository SaleItemRepository { get; }
         ISalePaymentRepository SalePaymentRepository { get; }
         ISaleRepository SaleRepository { get; }
+        ICouponCustomerRepository CouponCustomerRepository { get; }
+        ICouponRepository CouponRepository { get; }
         void Save();
     }
 }
