@@ -27,6 +27,17 @@ namespace Domain.Entities
         [Column("quantity")]
         public uint Quantity { get; set; }
 
+        public SaleItem() { }
+
+        public SaleItem(Guid saleId, Guid productId, decimal unitValue, uint quantity)
+        {
+            SaleId = saleId;
+            ProductId = productId;
+            RefundStatus = RefundStatus.None;
+            UnitValue = unitValue;
+            Quantity = quantity;
+        }
+
         public Sale Sale { get; set; }
         public Product Product { get; set; }
     }

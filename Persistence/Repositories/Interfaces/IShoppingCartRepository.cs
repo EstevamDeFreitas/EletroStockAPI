@@ -10,5 +10,6 @@ namespace Persistence.Repositories.Interfaces
     public interface IShoppingCartRepository : IRepositoryBase<ShoppingCart>
     {
         ShoppingCart? GetCustomerShoppingCart(Guid customerId);
+        ShoppingCart? GetShoppingCart(Guid id);
     }
 }

@@ -9,5 +9,8 @@ namespace Persistence.Repositories.Interfaces
 {
     public interface ISaleRepository : IRepositoryBase<Sale>
     {
+        Sale? GetSaleFullInfo(Guid id);
+        List<Sale> GetAllDetail();
+        List<Sale> GetCustomerSales(Guid customerId);
     }
 }

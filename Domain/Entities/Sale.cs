@@ -32,12 +32,26 @@ namespace Domain.Entities
         public List<SaleItem> SaleItems { get; set; }
         public List<SalePayment> SalePayments { get; set; }
         public List<SaleCoupon>? SaleCoupons { get; set; }
+
+        public Sale() { }
+
+        public Sale(Guid customerId, Guid addressId, decimal shipping)
+        {
+            CustomerId = customerId;
+            AddressId = addressId;
+            SaleStatus = SaleStatus.Analisys;
+            SaleDate = DateTime.Now;
+            Shipping = shipping;
+            this.Generate();
+        }
     }
 
     public enum SaleStatus
     {
-        Processing,
+        Analisys,
+        PaymentConfirmed,
         Transporting,
-        Delivered
+        Delivered,
+        Finished
     }
 }

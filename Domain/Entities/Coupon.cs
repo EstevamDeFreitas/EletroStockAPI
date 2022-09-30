@@ -30,7 +30,7 @@ namespace Domain.Entities
 
     public enum CouponType
     {
-        Percentage,
+        Refund,
         Value
     }
 }

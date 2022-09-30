@@ -21,6 +21,15 @@ namespace Domain.Entities
         [Column("vl_discount")]
         public decimal DiscountValue { get; set; }
 
+        public SaleCoupon() { }
+
+        public SaleCoupon(Guid couponCustomerId, Guid saleId, decimal discountValue)
+        {
+            CouponCustomerId = couponCustomerId;
+            SaleId = saleId;
+            DiscountValue = discountValue;
+        }
+
         public Sale Sale { get; set; }
         public CouponCustomer CouponCustomer { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Database;
 using Persistence.Repositories.Interfaces;
 using System;
@@ -13,6 +14,29 @@ namespace Persistence.Repositories.Implementation
     {
         public SaleRepository(EletroStockContext dbContext) : base(dbContext)
         {
+        }
+
+        public List<Sale> GetAllDetail()
+        {
+            return DbContext.Sales.Include(x => x.Customer).ToList();
+        }
+
+        public List<Sale> GetCustomerSales(Guid customerId)
+        {
+            return DbContext.Sales.Where(x => x.CustomerId == customerId).ToList();
+        }
+
+        public Sale? GetSaleFullInfo(Guid id)
+        {
+            return DbContext.Sales.Include(x => x.SaleCoupons)
+                                    .ThenInclude(x => x.CouponCustomer)
+                                        .ThenInclude(x => x.Coupon)
+                                .Include(x => x.SalePayments)
+                                    .ThenInclude(x => x.CreditCard)
+                                .Include(x => x.SaleItems)
+                                    .ThenInclude(x => x.Product)
+                                .Where(x => x.Id == id)
+                                .FirstOrDefault();
         }
     }
 }

@@ -21,6 +21,15 @@ namespace Domain.Entities
         [Column("vl_paid")]
         public decimal ValuePaid { get; set; }
 
+        public SalePayment() { }
+
+        public SalePayment(Guid creditCardId, Guid saleId, decimal valuePaid)
+        {
+            CreditCardId = creditCardId;
+            SaleId = saleId;
+            ValuePaid = valuePaid;
+        }
+
         public CreditCard CreditCard { get; set; }
         public Sale Sale { get; set; }
     }

@@ -15,5 +15,7 @@ namespace Services.Services.Interfaces
         void UpdateStock(StockDTO stock);
         void CreateStock(StockDTO stock);
         void DeleteStock(Guid id);
+
+        void ConsumeStock(Guid productId, uint quantity);
     }
 }

@@ -24,8 +24,15 @@ namespace Services.DTO
     public class SaleCreateDTO
     {
         public Guid ShoppingCartId { get; set; }
-        public List<Guid> AddressIds { get; set; }
-        public List<Guid> CreditCardIds { get; set; }
-        public List<Guid>? CustomerCouponsIds { get; set; }
+        public Guid AddressId { get; set; }
+        public decimal Shipping { get; set; }
+        public List<ValueById> CreditCards { get; set; }
+        public List<ValueById>? CustomerCouponsIds { get; set; }
+    }
+
+    public class ValueById
+    {
+        public Guid Id { get; set; }
+        public decimal Value { get; set; }
     }
 }

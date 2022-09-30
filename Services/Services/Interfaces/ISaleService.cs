@@ -13,7 +13,7 @@ namespace Services.Services.Interfaces
         SaleDTO GetSale(Guid id);
         List<SaleDTO> GetSalesFromCustomer(Guid customerId);
         List<SaleDTO> GetSales();
-        void GenerateSale(SaleCreateDTO saleCreateDTO);
+        void GenerateSale(SaleCreateDTO saleCreateDTO, Guid customerId);
         void ChangeSaleStatus(Guid id, SaleStatus status);
     }
 }

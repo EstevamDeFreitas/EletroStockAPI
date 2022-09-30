@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Persistence.Repositories.Interfaces;
 using Services.DTO;
+using Services.Exceptions.Stock;
 using Services.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,36 @@ namespace Services.Services.Implementation
         public StockService(IRepositoryWrapper repository, IMapper mapper) : base(repository)
         {
             _mapper = mapper;
+        }
+
+        public void ConsumeStock(Guid productId, uint quantity)
+        {
+            var stocks = _repository.StockRepository.FindByCondition(x => x.ProductId == productId && x.Quantity > 0).OrderBy(x => x.Quantity).ToList();
+
+            foreach (var stock in stocks)
+            {
+                if(stock.Quantity < quantity)
+                {
+                    quantity -= stock.Quantity;
+
+                    stock.Quantity = 0;
+                }
+                else
+                {
+                    stock.Quantity -= quantity;
+                    quantity = 0;
+                    break;
+                }
+            }
+
+            if(quantity > 0)
+            {
+                var product = _repository.ProductRepository.FindByCondition(x => x.Id == productId).FirstOrDefault();
+
+                throw new InsufficientStock(product.Name);
+            }
+
+            _repository.Save();
         }
 
         public void CreateStock(StockDTO stock)
