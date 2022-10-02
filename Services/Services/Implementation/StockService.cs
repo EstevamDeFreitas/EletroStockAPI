@@ -22,7 +22,7 @@ namespace Services.Services.Implementation
 
         public void ConsumeStock(Guid productId, uint quantity)
         {
-            var stocks = _repository.StockRepository.FindByCondition(x => x.ProductId == productId && x.Quantity > 0).OrderBy(x => x.Quantity).ToList();
+            var stocks = _repository.StockRepository.FindByCondition(x => x.ProductId == productId && x.Quantity > 0).OrderBy(x => x.DateCreation).ToList();
 
             foreach (var stock in stocks)
             {
@@ -45,6 +45,11 @@ namespace Services.Services.Implementation
                 var product = _repository.ProductRepository.FindByCondition(x => x.Id == productId).FirstOrDefault();
 
                 throw new InsufficientStock(product.Name);
+            }
+
+            foreach (var stock in stocks)
+            {
+                _repository.StockRepository.Update(stock);
             }
 
             _repository.Save();

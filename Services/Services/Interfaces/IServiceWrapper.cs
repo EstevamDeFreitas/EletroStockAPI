@@ -19,5 +19,6 @@ namespace Services.Services.Interfaces
         IProductService ProductService { get; }
         IStockService StockService { get; }
         IShoppingCartService ShoppingCartService { get; }
+        ISaleService SaleService { get; }
     }
 }

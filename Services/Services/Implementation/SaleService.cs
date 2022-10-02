@@ -32,20 +32,22 @@ namespace Services.Services.Implementation
 
             var coupons = new List<CouponCustomer>();
 
-            if(saleCreateDTO.CustomerCouponsIds is not null)
+            if(saleCreateDTO.CustomerCoupons is not null)
             {
-                coupons = _repository.CouponCustomerRepository.GetCouponsFullInfo(saleCreateDTO.CustomerCouponsIds.Select(x => x.Id).ToList());
+                coupons = _repository.CouponCustomerRepository.GetCouponsFullInfo(saleCreateDTO.CustomerCoupons.Select(x => x.Id).ToList());
             }
 
             var shoppingCartDTO = _mapper.Map<ShoppingCartDTO>(shoppingCart);
 
             var totalSaleValue = shoppingCartDTO.ShoppingCartItems.Sum(x => x.Quantity * x.Product.Price);
 
+            totalSaleValue -= saleCreateDTO.Shipping;
+
 
 
             var sale = new Sale(customerId, saleCreateDTO.AddressId, saleCreateDTO.Shipping);
 
-            var saleItems = new List<SaleItem>();
+            sale.SaleItems = new List<SaleItem>();
 
             foreach(var cartItem in shoppingCartDTO.ShoppingCartItems)
             {
@@ -56,6 +58,29 @@ namespace Services.Services.Implementation
                 sale.SaleItems.Add(item);
             }
 
+            if (saleCreateDTO.CustomerCoupons is not null)
+            {
+                sale.SaleCoupons = new List<SaleCoupon>();
+                foreach (var couponSale in saleCreateDTO.CustomerCoupons)
+                {
+                    var coupon = new SaleCoupon(couponSale.Id, sale.Id, couponSale.Value);
+
+                    totalSaleValue -= couponSale.Value;
+
+                    var couponFound = _repository.CouponCustomerRepository.FindByCondition(x => x.Id == couponSale.Id).FirstOrDefault();
+                    if (couponFound != null)
+                    {
+                        couponFound.ValueRemaining -= couponSale.Value;
+
+                        _repository.CouponCustomerRepository.Update(couponFound);
+                    }
+
+                    sale.SaleCoupons.Add(coupon);
+                }
+            }
+
+            sale.SalePayments = new List<SalePayment>();
+
             foreach (var cardPay in saleCreateDTO.CreditCards)
             {
                 var card = new SalePayment(cardPay.Id, sale.Id, cardPay.Value);
@@ -63,15 +88,7 @@ namespace Services.Services.Implementation
                 sale.SalePayments.Add(card);
             }
 
-            if(saleCreateDTO.CustomerCouponsIds is not null)
-            {
-                foreach (var couponSale in saleCreateDTO.CustomerCouponsIds)
-                {
-                    var coupon = new SaleCoupon(couponSale.Id, sale.Id, couponSale.Value);
-
-                    sale.SaleCoupons.Add(coupon);
-                }
-            }
+            
 
             _repository.SaleRepository.Create(sale);
             _repository.Save();

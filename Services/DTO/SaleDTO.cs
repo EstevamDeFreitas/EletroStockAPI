@@ -18,7 +18,7 @@ namespace Services.DTO
 
         public List<SaleItemDTO> SaleItems { get; set; }
         public List<SalePaymentDTO> SalePayments { get; set; }
-        public List<SaleCouponDTO> SaleCoupons { get; set; }
+        public List<SaleCouponDTO>? SaleCoupons { get; set; }
     }
 
     public class SaleCreateDTO
@@ -27,7 +27,7 @@ namespace Services.DTO
         public Guid AddressId { get; set; }
         public decimal Shipping { get; set; }
         public List<ValueById> CreditCards { get; set; }
-        public List<ValueById>? CustomerCouponsIds { get; set; }
+        public List<ValueById>? CustomerCoupons { get; set; }
     }
 
     public class ValueById

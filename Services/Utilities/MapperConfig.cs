@@ -18,12 +18,17 @@ namespace Services.Utilities
             CreateMap<CategoryDTO, Category>().ReverseMap();
             CreateMap<PriceGroupDTO, PriceGroup>().ReverseMap();
             CreateMap<ProductDTO, Product>().ReverseMap();
+            CreateMap<CreditCardDTO, CreditCard>().ReverseMap();
             CreateMap<ProductCategoryDTO, ProductCategory>().ReverseMap();
             CreateMap<ProductImageDTO, ProductImage>().ReverseMap();
             CreateMap<StockDTO, Stock>().ReverseMap();
             CreateMap<ProductStockDTO, Product>().ReverseMap();
             CreateMap<ShoppingCartDTO, ShoppingCart>().ReverseMap();
             CreateMap<ShoppingCartItemDTO, ShoppingCartItem>().ReverseMap();
+            CreateMap<SaleDTO, Sale>().ReverseMap();
+            CreateMap<SaleItemDTO, SaleItem>().ReverseMap();
+            CreateMap<SalePaymentDTO, SalePayment>().ReverseMap();
+            CreateMap<SaleCouponDTO, SaleCoupon>().ReverseMap();
         }
     }
 }
