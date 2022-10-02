@@ -24,7 +24,7 @@ namespace Persistence.Repositories.Implementation
                                             .Include(x => x.ShoppingCartItems)
                                                 .ThenInclude(x => x.Product)
                                                     .ThenInclude(x => x.PriceGroup)
-                                            .Where(x => x.CustomerId == customerId && x.CartValidity >= DateTime.Now).FirstOrDefault();
+                                            .Where(x => x.CustomerId == customerId && x.CartValidity >= DateTime.Now).AsNoTracking().FirstOrDefault();
         }
 
         public ShoppingCart? GetShoppingCart(Guid id)
@@ -35,7 +35,7 @@ namespace Persistence.Repositories.Implementation
                                             .Include(x => x.ShoppingCartItems)
                                                 .ThenInclude(x => x.Product)
                                                     .ThenInclude(x => x.PriceGroup)
-                                            .Where(x => x.Id == id).FirstOrDefault();
+                                            .Where(x => x.Id == id).AsNoTracking().FirstOrDefault();
         }
     }
 }

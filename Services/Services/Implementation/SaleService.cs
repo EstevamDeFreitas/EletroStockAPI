@@ -23,7 +23,12 @@ namespace Services.Services.Implementation
 
         public void ChangeSaleStatus(Guid id, SaleStatus status)
         {
-            throw new NotImplementedException();
+            var saleFound = _repository.SaleRepository.FindByCondition(x => x.Id == id).FirstOrDefault();
+
+            saleFound.SaleStatus = status;
+
+            _repository.SaleRepository.Update(saleFound);
+            _repository.Save();
         }
 
         public void GenerateSale(SaleCreateDTO saleCreateDTO, Guid customerId)

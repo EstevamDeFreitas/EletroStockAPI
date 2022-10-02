@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.DTO;
 using Services.Notations;
@@ -53,6 +54,25 @@ namespace EletroStockAPI.Controllers
                 return Ok(new Response<object>
                 {
                     Message = "Sale Created"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public IActionResult ChangeSaleStatus(Guid id, [FromQuery] SaleStatus saleStatus)
+        {
+            try
+            {
+                _serviceWrapper.SaleService.ChangeSaleStatus(id, saleStatus);
+
+                return Ok(new Response<object>
+                {
+                    Message = "Sale Status Changed"
                 });
             }
             catch (Exception ex)
