@@ -80,5 +80,24 @@ namespace EletroStockAPI.Controllers
                 return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
+
+        [HttpGet("all")]
+        public IActionResult GetAllSales()
+        {
+            try
+            {
+                var sales = _serviceWrapper.SaleService.GetSales();
+
+                return Ok(new Response<List<SaleDTO>>
+                {
+                    Data = sales,
+                    Message = "Sales Found"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
     }
 }
