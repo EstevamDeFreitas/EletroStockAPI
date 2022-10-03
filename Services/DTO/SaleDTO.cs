@@ -16,6 +16,14 @@ namespace Services.DTO
         public DateTime SaleDate { get; set; }
         public decimal Shipping { get; set; }
 
+        public decimal Total
+        {
+            get 
+            { 
+                return SaleItems.Sum(x => x.UnitValue * x.Quantity);
+            }
+        }
+
         public List<SaleItemDTO> SaleItems { get; set; }
         public List<SalePaymentDTO> SalePayments { get; set; }
         public List<SaleCouponDTO>? SaleCoupons { get; set; }
