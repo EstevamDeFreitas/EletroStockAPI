@@ -63,7 +63,6 @@ namespace EletroStockAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize]
         public IActionResult ChangeSaleStatus(Guid id, [FromQuery] SaleStatus saleStatus)
         {
             try

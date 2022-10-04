@@ -110,7 +110,7 @@ namespace Services.Services.Implementation
         {
             var sales = _repository.SaleRepository.GetAllDetail();
 
-            return _mapper.Map<List<SaleDTO>>(sales);
+            return _mapper.Map<List<SaleDTO>>(sales).OrderBy(x => x.SaleDate).ToList();
         }
 
         public List<SaleDTO> GetSalesFromCustomer(Guid customerId)

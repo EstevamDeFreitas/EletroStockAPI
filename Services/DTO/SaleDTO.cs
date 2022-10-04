@@ -27,6 +27,7 @@ namespace Services.DTO
         public List<SaleItemDTO> SaleItems { get; set; }
         public List<SalePaymentDTO> SalePayments { get; set; }
         public List<SaleCouponDTO>? SaleCoupons { get; set; }
+        public CustomerDTO Customer { get; set; }
     }
 
     public class SaleCreateDTO

@@ -30,6 +30,7 @@ namespace Persistence.Repositories.Implementation
                                     .ThenInclude(x => x.CreditCard)
                                 .Include(x => x.SaleItems)
                                     .ThenInclude(x => x.Product)
+                                .Include(x => x.Customer)
                                 .Where(x => x.CustomerId == customerId).ToList();
         }
 
