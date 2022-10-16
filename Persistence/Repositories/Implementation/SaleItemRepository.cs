@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Database;
 using Persistence.Repositories.Interfaces;
 using System;
@@ -17,7 +18,7 @@ namespace Persistence.Repositories.Implementation
 
         public IEnumerable<SaleItem> GetSaleItemsFromList(List<SaleItem> saleItems)
         {
-            return DbContext.SaleItems.AsEnumerable().Where(x => saleItems.AsEnumerable().Any(y => y.SaleId == x.SaleId && y.ProductId == x.ProductId));
+            return DbContext.SaleItems.Include(x => x.Sale).AsEnumerable().Where(x => saleItems.AsEnumerable().Any(y => y.SaleId == x.SaleId && y.ProductId == x.ProductId));
         }
     }
 }

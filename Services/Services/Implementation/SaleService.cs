@@ -38,16 +38,26 @@ namespace Services.Services.Implementation
 
         public void ChangeRefundStatus(SaleItemSummaryDTO saleItem, RefundStatus refundStatus)
         {
-            var saleItemsFound = _repository.SaleItemRepository.GetSaleItemsFromList(_mapper.Map<List<SaleItem>>(new List<SaleItemSummaryDTO> { saleItem })).ToList();
+            var saleItemsFound = _repository.SaleItemRepository.GetSaleItemsFromList(_mapper.Map<List<SaleItem>>(new List<SaleItemSummaryDTO> { saleItem })).FirstOrDefault();
 
-            saleItemsFound.ForEach(x =>
-            {
-                x.RefundStatus = refundStatus;
-            });
+            saleItemsFound.RefundStatus = refundStatus;
 
             if(refundStatus == RefundStatus.Refunded)
             {
-                
+                _serviceWrapper.CouponCustomerService.CreateCustomerRefundCoupon(new CouponDTO
+                {
+                    CouponType = CouponType.Refund,
+                    HasValidity = false,
+                    Validity = DateTime.Now,
+                    Name = $"Reembolso: {DateTime.Now.ToString("dd/MM/yyyy")}",
+                    Value = saleItemsFound.UnitValue * saleItemsFound.Quantity
+                },
+                new CouponCustomerDTO
+                {
+                    CustomerId = saleItemsFound.Sale.CustomerId,
+                    ValueRemaining = saleItemsFound.UnitValue * saleItemsFound.Quantity
+                }
+                );
             }
 
             _repository.Save();
