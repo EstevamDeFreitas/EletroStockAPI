@@ -45,6 +45,11 @@ namespace Services.Services.Implementation
                 x.RefundStatus = refundStatus;
             });
 
+            if(refundStatus == RefundStatus.Refunded)
+            {
+                
+            }
+
             _repository.Save();
         }
 

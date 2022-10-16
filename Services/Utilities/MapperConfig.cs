@@ -31,6 +31,8 @@ namespace Services.Utilities
             CreateMap<SalePaymentDTO, SalePayment>().ReverseMap();
             CreateMap<SaleCouponDTO, SaleCoupon>().ReverseMap();
             CreateMap<CustomerDTO, Customer>().ReverseMap();
+            CreateMap<Coupon, CouponDTO>().ReverseMap();
+            CreateMap<CouponCustomer, CouponCustomerDTO>().ReverseMap();
         }
     }
 }
