@@ -119,5 +119,43 @@ namespace EletroStockAPI.Controllers
                 return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
+
+        [HttpPut("refund")]
+        public IActionResult ChangeRefundStatusSaleItems([FromBody] SaleItemSummaryDTO saleItem, [FromQuery] RefundStatus refundStatus)
+        {
+            try
+            {
+                _serviceWrapper.SaleService.ChangeRefundStatus(saleItem, refundStatus);
+
+                
+
+                return Ok(new Response<object>
+                {
+                    Message = "Sales Refund Status Changed"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
+
+        [HttpPut("refund/inventory")]
+        public IActionResult AcceptRefundIntoInventory([FromBody] SaleItemSummaryDTO saleItem)
+        {
+            try
+            {
+                _serviceWrapper.SaleService.AcceptInventory(saleItem);
+
+                return Ok(new Response<object>
+                {
+                    Message = "Products Returned To Stock"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
     }
 }

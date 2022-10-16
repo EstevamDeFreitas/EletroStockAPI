@@ -23,12 +23,29 @@ namespace Services.Services.Implementation
 
         public void AcceptInventory(SaleItemSummaryDTO saleItem)
         {
-            throw new NotImplementedException();
+            var saleItemFound = _repository.SaleItemRepository.GetSaleItemsFromList(_mapper.Map<List<SaleItem>>(new List<SaleItemSummaryDTO> { saleItem })).FirstOrDefault();
+
+            var stock = _repository.StockRepository.FindByCondition(x => x.ProductId == saleItemFound.ProductId).FirstOrDefault();
+
+            stock.Quantity += saleItemFound.Quantity;
+
+            saleItemFound.RefundStatus = RefundStatus.Finalized;
+
+            _repository.StockRepository.Update(stock);
+            _repository.SaleItemRepository.Update(saleItemFound);
+            _repository.Save();
         }
 
         public void ChangeRefundStatus(SaleItemSummaryDTO saleItem, RefundStatus refundStatus)
         {
-            throw new NotImplementedException();
+            var saleItemsFound = _repository.SaleItemRepository.GetSaleItemsFromList(_mapper.Map<List<SaleItem>>(new List<SaleItemSummaryDTO> { saleItem })).ToList();
+
+            saleItemsFound.ForEach(x =>
+            {
+                x.RefundStatus = refundStatus;
+            });
+
+            _repository.Save();
         }
 
         public void ChangeSaleStatus(Guid id, SaleStatus status)
