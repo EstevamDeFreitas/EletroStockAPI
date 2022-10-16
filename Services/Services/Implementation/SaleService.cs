@@ -21,6 +21,16 @@ namespace Services.Services.Implementation
             _serviceWrapper = serviceWrapper;
         }
 
+        public void AcceptInventory(SaleItemSummaryDTO saleItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangeRefundStatus(SaleItemSummaryDTO saleItem, RefundStatus refundStatus)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ChangeSaleStatus(Guid id, SaleStatus status)
         {
             var saleFound = _repository.SaleRepository.FindByCondition(x => x.Id == id).FirstOrDefault();
@@ -118,6 +128,18 @@ namespace Services.Services.Implementation
             var sales = _repository.SaleRepository.GetCustomerSales(customerId);
 
             return _mapper.Map<List<SaleDTO>>(sales);
+        }
+
+        public void RequestRefundSaleItems(List<SaleItemSummaryDTO> saleItems, Guid customerId)
+        {
+            var saleItemsFound = _repository.SaleItemRepository.GetSaleItemsFromList(_mapper.Map<List<SaleItem>>(saleItems)).ToList();
+
+            saleItemsFound.ForEach(x =>
+            {
+                x.RefundStatus = RefundStatus.Requested;
+            });
+
+            _repository.Save();
         }
     }
 }

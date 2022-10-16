@@ -9,5 +9,6 @@ namespace Persistence.Repositories.Interfaces
 {
     public interface ISaleItemRepository : IRepositoryBase<SaleItem>
     {
+        public IEnumerable<SaleItem> GetSaleItemsFromList(List<SaleItem> saleItems);
     }
 }

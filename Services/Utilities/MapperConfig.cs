@@ -26,6 +26,7 @@ namespace Services.Utilities
             CreateMap<ShoppingCartDTO, ShoppingCart>().ReverseMap();
             CreateMap<ShoppingCartItemDTO, ShoppingCartItem>().ReverseMap();
             CreateMap<SaleDTO, Sale>().ReverseMap();
+            CreateMap<SaleItemSummaryDTO, SaleItem>().ReverseMap();
             CreateMap<SaleItemDTO, SaleItem>().ReverseMap();
             CreateMap<SalePaymentDTO, SalePayment>().ReverseMap();
             CreateMap<SaleCouponDTO, SaleCoupon>().ReverseMap();

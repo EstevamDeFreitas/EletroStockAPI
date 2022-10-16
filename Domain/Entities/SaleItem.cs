@@ -47,6 +47,8 @@ namespace Domain.Entities
         None,
         Requested,
         Refunded,
+        //Utilizado no final depois de decidido se o item volta ao estoque ou não
+        Finalized,
         Rejected
     }
 }

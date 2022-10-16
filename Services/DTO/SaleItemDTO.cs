@@ -17,4 +17,10 @@ namespace Services.DTO
 
         public ProductDTO Product { get; set; }
     }
+
+    public class SaleItemSummaryDTO
+    {
+        public Guid SaleId { get; set; }
+        public Guid ProductId { get; set; } 
+    }
 }

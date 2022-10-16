@@ -98,5 +98,26 @@ namespace EletroStockAPI.Controllers
                 return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
+
+        [HttpPost("refund")]
+        [Authorize]
+        public IActionResult RefundSaleItems([FromBody] List<SaleItemSummaryDTO> saleItems)
+        {
+            try
+            {
+                var user = Guid.Parse((string)HttpContext.Items["User"]);
+
+                _serviceWrapper.SaleService.RequestRefundSaleItems(saleItems, user);
+
+                return Ok(new Response<object>
+                {
+                    Message = "Sales Refund Requested"
+                });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
     }
 }

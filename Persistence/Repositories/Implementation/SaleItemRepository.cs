@@ -14,5 +14,10 @@ namespace Persistence.Repositories.Implementation
         public SaleItemRepository(EletroStockContext dbContext) : base(dbContext)
         {
         }
+
+        public IEnumerable<SaleItem> GetSaleItemsFromList(List<SaleItem> saleItems)
+        {
+            return DbContext.SaleItems.AsEnumerable().Where(x => saleItems.AsEnumerable().Any(y => y.SaleId == x.SaleId && y.ProductId == x.ProductId));
+        }
     }
 }

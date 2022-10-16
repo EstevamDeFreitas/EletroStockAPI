@@ -15,5 +15,8 @@ namespace Services.Services.Interfaces
         List<SaleDTO> GetSales();
         void GenerateSale(SaleCreateDTO saleCreateDTO, Guid customerId);
         void ChangeSaleStatus(Guid id, SaleStatus status);
+        void RequestRefundSaleItems(List<SaleItemSummaryDTO> saleItems, Guid customerId);
+        void ChangeRefundStatus(SaleItemSummaryDTO saleItem, RefundStatus refundStatus);
+        void AcceptInventory(SaleItemSummaryDTO saleItem);
     }
 }
