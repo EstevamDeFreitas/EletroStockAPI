@@ -65,11 +65,13 @@ namespace Services.Services.Implementation
                 throw new ProductAlreadySelected(currentShoppingCart.ShoppingCartItems.First(x => x.ProductId == item.ProductId).Product.Name);
             }
 
-            currentShoppingCart.ShoppingCartItems.Add(new ShoppingCartItem { ProductId = item.ProductId, Quantity = item.Quantity, ShoppingCartId = currentShoppingCart.Id });
-
             currentShoppingCart.CartValidity = DateTime.Now.AddHours(2);
 
             _repository.ShoppingCartRepository.Update(currentShoppingCart);
+
+            _repository.ShoppingCartItemRepository.Create(new ShoppingCartItem { ProductId = item.ProductId, Quantity = item.Quantity, ShoppingCartId = currentShoppingCart.Id });
+
+            
             _repository.Save();
         }
 
@@ -105,15 +107,20 @@ namespace Services.Services.Implementation
         {
             var cartItem = _repository.ShoppingCartItemRepository.FindByCondition(x => x.ShoppingCartId == item.ShoppingCartId && x.ProductId == item.ProductId).FirstOrDefault();
 
-            if(item.Quantity == 0)
-            {
-                throw new QuantityMustBeDifferentFromZero();
-            }
-
             cartItem.Quantity = item.Quantity;
 
-            _repository.ShoppingCartItemRepository.Update(cartItem);
-            _repository.Save();
+            if(cartItem.Quantity == 0)
+            {
+                this.RemoveItem(item);
+
+            }
+            else
+            {
+                _repository.ShoppingCartItemRepository.Update(cartItem);
+                _repository.Save();
+
+            }
+
         }
     }
 }
