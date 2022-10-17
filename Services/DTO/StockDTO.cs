@@ -8,7 +8,7 @@ namespace Services.DTO
 {
     public class StockDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public Guid ProductId { get; set; }
         public string SourceName { get; set; }
         public int Quantity { get; set; }
