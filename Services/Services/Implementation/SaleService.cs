@@ -166,16 +166,11 @@ namespace Services.Services.Implementation
         {
             var saleItemsFound = _repository.SaleItemRepository.GetSaleItemsFromList(_mapper.Map<List<SaleItem>>(saleItems)).ToList();
 
-            var saleFound = _repository.SaleRepository.FindByCondition(x => x.Id == saleItemsFound.First().SaleId).FirstOrDefault();
-
             saleItemsFound.ForEach(x =>
             {
                 x.RefundStatus = RefundStatus.Requested;
+                x.Sale.SaleStatus = SaleStatus.RefundRequested;
             });
-
-            saleFound.SaleStatus = SaleStatus.RefundRequested;
-
-            _repository.SaleRepository.Update(saleFound);
 
             _repository.Save();
         }
