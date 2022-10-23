@@ -19,6 +19,27 @@ namespace EletroStockAPI.Controllers
             _serviceWrapper = serviceWrapper;
         }
 
+        [HttpGet("{id}")]
+        [Authorize]
+        public IActionResult GetSale(Guid id)
+        {
+            try
+            {
+
+                var sales = _serviceWrapper.SaleService.GetSale(id);
+
+                return Ok(new Response<SaleDTO>
+                {
+                    Data = sales,
+                    Message = "Sale Found"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult GetCustomerSales()
