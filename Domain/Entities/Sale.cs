@@ -52,6 +52,7 @@ namespace Domain.Entities
         PaymentConfirmed,
         Transporting,
         Delivered,
-        Finished
+        Finished,
+        RefundRequested
     }
 }
