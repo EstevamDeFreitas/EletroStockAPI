@@ -37,6 +37,7 @@ namespace Persistence.Repositories.Implementation
                                         .Include(x => x.InactiveReason)
                                             .ThenInclude(x => x.InactiveCategory)
                                         .Include(x => x.Stocks)
+                                        .Where(x => (x.InactiveReason == null || x.InactiveReason.InactiveCategory.Active) && (x.Stocks != null && x.Stocks.Any(y => y.Quantity > 0)))
                                         .ToList();
         }
     }
