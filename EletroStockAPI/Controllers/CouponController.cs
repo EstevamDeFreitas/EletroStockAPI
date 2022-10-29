@@ -94,7 +94,7 @@ namespace EletroStockAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{couponId}")]
         public IActionResult DeleteCoupon(Guid couponId)
         {
             try

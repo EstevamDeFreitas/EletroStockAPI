@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Persistence.Repositories.Interfaces;
 using Services.DTO;
+using Services.Exceptions.Coupon;
 using Services.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,10 @@ namespace Services.Services.Implementation
 
                 _repository.CouponRepository.Delete(coupon);
                 _repository.Save();
+            }
+            else
+            {
+                throw new CouponIsInUseException();
             }
         }
 
