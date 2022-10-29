@@ -15,6 +15,7 @@ namespace Services.Services.Interfaces
         void DeleteCoupon(Guid couponId);
         List<CouponCustomerDTO> GetCustomerCoupons(Guid customerId);
         void SendCouponToCustomer(Guid couponId, Guid customerId);
+        List<CouponDTO> GetCoupons();
         
     }
 }

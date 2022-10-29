@@ -57,6 +57,13 @@ namespace Services.Services.Implementation
             }
         }
 
+        public List<CouponDTO> GetCoupons()
+        {
+            var coupons = _repository.CouponRepository.GetAll();
+
+            return _mapper.Map<List<CouponDTO>>(coupons);
+        }
+
         public List<CouponCustomerDTO> GetCustomerCoupons(Guid customerId)
         {
             var coupons = _repository.CouponCustomerRepository.GetCustomerCoupons(customerId);
