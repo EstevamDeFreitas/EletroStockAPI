@@ -10,5 +10,6 @@ namespace Persistence.Repositories.Interfaces
     public interface ICouponCustomerRepository : IRepositoryBase<CouponCustomer>
     {
         List<CouponCustomer> GetCouponsFullInfo(List<Guid> customerCouponsIds);
+        List<CouponCustomer> GetCustomerCoupons(Guid customerId);
     }
 }

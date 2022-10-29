@@ -20,5 +20,10 @@ namespace Persistence.Repositories.Implementation
         {
             return DbContext.CouponCustomers.Include(x => x.Coupon).Where(x => customerCouponsIds.Contains(x.Id)).ToList();
         }
+
+        public List<CouponCustomer> GetCustomerCoupons(Guid customerId)
+        {
+            return DbContext.CouponCustomers.Include(x => x.Coupon).Where(x => x.CustomerId == customerId && x.ValueRemaining > 0 && (x.Coupon.HasValidity? DateTime.Now < x.Coupon.Validity : true)).ToList();
+        }
     }
 }
