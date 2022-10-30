@@ -20,7 +20,7 @@ namespace Services.DTO
         {
             get 
             { 
-                return SaleItems.Sum(x => x.UnitValue * x.Quantity);
+                return SaleItems.Sum(x => x.UnitValue * x.Quantity) + Shipping;
             }
         }
 
