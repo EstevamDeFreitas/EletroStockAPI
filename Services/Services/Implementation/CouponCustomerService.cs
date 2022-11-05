@@ -49,7 +49,7 @@ namespace Services.Services.Implementation
         {
             var couponCustomers = _repository.CouponCustomerRepository.GetCouponsFullInfo(new List<Guid> { couponId });
 
-            if(couponCustomers == null)
+            if(couponCustomers == null || couponCustomers.Count() == 0)
             {
                 var coupon = _repository.CouponRepository.FindByCondition(x => x.Id == couponId).FirstOrDefault();
 
