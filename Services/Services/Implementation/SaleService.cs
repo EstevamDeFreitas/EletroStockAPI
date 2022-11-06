@@ -114,7 +114,9 @@ namespace Services.Services.Implementation
 
                     totalSaleValue -= couponSale.Value;
 
-                    var couponFound = _repository.CouponCustomerRepository.FindByCondition(x => x.Id == couponSale.Id).FirstOrDefault();
+                    //var couponFound = _repository.CouponCustomerRepository.FindByCondition(x => x.Id == couponSale.Id).FirstOrDefault();
+                    var couponFound = coupons.Where(x => x.Id == couponSale.Id).FirstOrDefault();
+
                     if (couponFound != null)
                     {
                         couponFound.ValueRemaining -= couponSale.Value;

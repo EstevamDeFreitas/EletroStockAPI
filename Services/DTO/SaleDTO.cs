@@ -19,8 +19,15 @@ namespace Services.DTO
         public decimal Total
         {
             get 
-            { 
-                return SaleItems.Sum(x => x.UnitValue * x.Quantity) + Shipping;
+            {
+                var totalSaleValue = SaleItems.Sum(x => x.UnitValue * x.Quantity) + Shipping;
+
+                if(SaleCoupons is not null && SaleCoupons.Count > 0)
+                {
+                    totalSaleValue -= SaleCoupons.Sum(x => x.DiscountValue);
+                }
+
+                return totalSaleValue;
             }
         }
 
