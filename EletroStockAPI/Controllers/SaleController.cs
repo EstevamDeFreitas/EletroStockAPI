@@ -178,5 +178,18 @@ namespace EletroStockAPI.Controllers
                 return BadRequest(new Response<object> { Message = ex.Message });
             }
         }
+
+        [HttpGet("summary")]
+        public IActionResult GetSaleSummary([FromQuery] DateTime startDate, [FromQuery] DateTime endDate, [FromQuery] string productCode)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response<object> { Message = ex.Message });
+            }
+        }
     }
 }
