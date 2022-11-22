@@ -180,11 +180,17 @@ namespace EletroStockAPI.Controllers
         }
 
         [HttpGet("summary")]
-        public IActionResult GetSaleSummary([FromQuery] DateTime startDate, [FromQuery] DateTime endDate, [FromQuery] string productCode)
+        public IActionResult GetSaleSummary([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate, [FromQuery] string? productCode, [FromQuery] bool isQuantity)
         {
             try
             {
-                return Ok();
+                var sales = _serviceWrapper.SaleService.GetSaleSummary(isQuantity, startDate, endDate, productCode);
+
+                return Ok(new Response<SaleSummary>
+                {
+                    Message = "Sale summary found",
+                    Data = sales
+                });
             }
             catch (Exception ex)
             {

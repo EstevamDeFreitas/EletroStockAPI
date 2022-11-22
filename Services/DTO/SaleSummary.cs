@@ -9,19 +9,17 @@ namespace Services.DTO
 {
     public class SaleSummary
     {
-        public List<string> Products { get; set; }
-        public List<MonthlyData<List<ProductSummary>>> MonthlyProductValue { get; set; }
+        public List<ProductSummary> MonthlyProductValue { get; set; }
 
         public void Order()
         {
-            Products = Products.OrderBy(x => x).ToList();
-            MonthlyProductValue = MonthlyProductValue.OrderBy(x => x.Month).ToList();
-            MonthlyProductValue.ForEach(month =>
+            var months = MonthlyProductValue.SelectMany(x => x.Values).Select(x => x.Month).Distinct().ToList();
+
+            MonthlyProductValue = MonthlyProductValue.OrderBy(x => x.ProductName).ToList();
+
+            MonthlyProductValue.ForEach(prod =>
             {
-                Products.ForEach(prod =>
-                {
-                    
-                });
+                prod.Values = prod.Values.OrderBy(x => x.Month).ToList();
             });
         }
     }
@@ -29,6 +27,6 @@ namespace Services.DTO
     public class ProductSummary
     {
         public string ProductName { get; set; }
-        public decimal Value { get; set; }
+        public List<MonthlyData<decimal>> Values { get; set; }
     }
 }

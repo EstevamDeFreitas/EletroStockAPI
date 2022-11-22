@@ -18,5 +18,6 @@ namespace Services.Services.Interfaces
         void RequestRefundSaleItems(List<SaleItemSummaryDTO> saleItems, Guid customerId);
         void ChangeRefundStatus(SaleItemSummaryDTO saleItem, RefundStatus refundStatus);
         void AcceptInventory(SaleItemSummaryDTO saleItem);
+        SaleSummary GetSaleSummary(bool isQuantity, DateTime? startDate, DateTime? endDate, string? productCode);
     }
 }

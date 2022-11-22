@@ -164,6 +164,27 @@ namespace Services.Services.Implementation
             return _mapper.Map<List<SaleDTO>>(sales);
         }
 
+        public SaleSummary GetSaleSummary(bool isQuantity, DateTime? startDate, DateTime? endDate, string? productCode)
+        {
+            var sales = _repository.SaleItemRepository.GetSaleItemsFilter(startDate, endDate, productCode);
+
+            var saleSummary = new SaleSummary();
+
+            saleSummary.MonthlyProductValue = sales.GroupBy(x => x.ProductId).Select(prod => new ProductSummary
+            {
+                ProductName = prod.First().Product.Name,
+                Values = prod.GroupBy(x => new {x.Sale.SaleDate.Month, x.Sale.SaleDate.Year}).Select(s => new Utilities.MonthlyData<decimal>
+                {
+                    Month = new DateTime(s.Key.Year, s.Key.Month, 1),
+                    Data = s.Sum(x => isQuantity ? x.Quantity : (x.UnitValue * x.Quantity))
+                }).ToList()
+            }).ToList();
+
+            saleSummary.Order();
+
+            return saleSummary;
+        }
+
         public void RequestRefundSaleItems(List<SaleItemSummaryDTO> saleItems, Guid customerId)
         {
             var saleItemsFound = _repository.SaleItemRepository.GetSaleItemsFromList(_mapper.Map<List<SaleItem>>(saleItems)).ToList();

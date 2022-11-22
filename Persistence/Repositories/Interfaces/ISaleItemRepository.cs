@@ -10,5 +10,6 @@ namespace Persistence.Repositories.Interfaces
     public interface ISaleItemRepository : IRepositoryBase<SaleItem>
     {
         public IEnumerable<SaleItem> GetSaleItemsFromList(List<SaleItem> saleItems);
+        public IEnumerable<SaleItem> GetSaleItemsFilter(DateTime? startDate, DateTime? endDate, string? productCode);
     }
 }
