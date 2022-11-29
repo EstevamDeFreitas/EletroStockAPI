@@ -180,6 +180,34 @@ namespace Services.Services.Implementation
                 }).ToList()
             }).ToList();
 
+            var result = new List<DateTime>();
+
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                while (startDate < endDate)
+                {
+                    result.Add(startDate.Value);
+                    startDate = startDate.Value.AddMonths(1);
+                }
+
+                result.OrderBy(x => x);
+            }
+
+
+            saleSummary.MonthlyProductValue.ForEach(prod =>
+            {
+                result.ForEach(month =>
+                {
+                    var tempDate = new DateTime(month.Year, month.Month, 1);
+
+                    if(!prod.Values.Any(x => x.Month == tempDate))
+                    {
+                        prod.Values.Add(new Utilities.MonthlyData<decimal> { Month = tempDate, Data = 0 });
+                    }
+                });
+            });
+            
+
             saleSummary.Order();
 
             return saleSummary;
