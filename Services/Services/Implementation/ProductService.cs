@@ -87,9 +87,9 @@ namespace Services.Services.Implementation
         }
 
         public void UpdateProduct(ProductDTO product)
-        {
+        {   
             var productFound = _repository.ProductRepository.GetProductFullInfo((Guid)product.Id);
-
+            productFound.PriceGroupId = new Guid();
             if (productFound is null)
             {
                 throw new NotFound("Product");
@@ -107,6 +107,8 @@ namespace Services.Services.Implementation
             productFound.InactiveReasonId = product.InactiveReasonId;
             productFound.ProductCategories = _mapper.Map<List<ProductCategory>>(product.ProductCategories);
             productFound.ProductImages = _mapper.Map<List<ProductImage>>(product.ProductImages);
+
+            productFound.PriceGroup = null;
 
             productFound.ProductImages.ForEach(ProdIm =>
             {
