@@ -180,6 +180,17 @@ namespace Services.Services.Implementation
                 }).ToList()
             }).ToList();
 
+            if(startDate == null)
+            {
+                startDate = saleSummary.MonthlyProductValue.SelectMany(x => x.Values).Select(x => x.Month).Min();
+            }
+
+            if (endDate == null)
+            {
+                endDate = saleSummary.MonthlyProductValue.SelectMany(x => x.Values).Select(x => x.Month).Max();
+            }
+
+
             var result = new List<DateTime>();
 
             if (startDate.HasValue && endDate.HasValue)
