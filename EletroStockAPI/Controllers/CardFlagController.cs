@@ -37,7 +37,7 @@ namespace EletroStockAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCardFlag([FromBody]string cardName)
+        public IActionResult CreateCardFlag([FromBody] string cardName)
         {
             try
             {
